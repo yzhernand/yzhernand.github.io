@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Yozen Hernandez</title>
+    <link>https://yzhernand.github.io/</link>
+    <description>Recent content on Yozen Hernandez</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 21 May 2019 09:25:05 -0400</lastBuildDate>
+    
+	<atom:link href="https://yzhernand.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Perl Weekly Challenge 9</title>
+      <link>https://yzhernand.github.io/posts/perl-weekly-challenge-9/</link>
+      <pubDate>Tue, 21 May 2019 09:25:05 -0400</pubDate>
+      
+      <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-9/</guid>
+      <description>This will be my first ever blog post ever. Hi there!
+I decided to blog a bit so that I can write about the process that goes into solving the Perl Weekly Challenge that I recently heard about. I love Perl, challenging myself with programming tasks, and procrastination. It all works out!
+So this post will deal with the 9th challenge so far. Check out this challenge, as well as the Perl Weekly Challenge page, here.</description>
+    </item>
+    
+  </channel>
+</rss>
