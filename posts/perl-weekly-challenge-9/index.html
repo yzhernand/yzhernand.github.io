@@ -79,9 +79,7 @@ So this post will deal with the 9th challenge so far. Check out this challenge, 
 <p>In this case, if <code>$n = 5</code>, then <code>$root = 316</code>. Cool, we just skipped uselessly squaring <code>1 .. 315</code> (and possibly checking the squares to see if we satisfied the challenge condition, depending on how you wrote your code).</p>
 
 <p>Next, we have to loop until we find a perfect square which has at least <code>$n</code> unique digits. So I wrote my loop like so:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">my</span> $found;
-
-<span style="color:#66d9ef">while</span> ( <span style="color:#ae81ff">1</span> ) {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">while</span> ( <span style="color:#ae81ff">1</span> ) {
 
     <span style="color:#75715e"># Use positive lookahead to get rid of duplicate digits</span>
     ( <span style="color:#66d9ef">my</span> $dedup <span style="color:#f92672">=</span> $root<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> ) <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/(.)(?=.*?\1)//g</span>;
