@@ -76,7 +76,7 @@ So this post will deal with the 9th challenge so far. Check out this challenge, 
 
 <p>Anyway, my idea was to just not waste time starting with 1, or 2, or any square root that would not yield at least a 5-digit square. So, for a general case of an n-digit square:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">my</span> $root <span style="color:#f92672">=</span> int( sqrt( <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span>( $n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ) ) );</code></pre></div>
-<p>In this case, if <code>$n = 5</code>, then <code>$root = 316</code>. Cool, we just skipped uselessly squaring <code>1 .. 315</code> (and possibly checking the squares to see if we satisfied the challenge condition, depending on how you wrote your code).</p>
+<p>In this case, if <code>$n = 5</code>, then <del><code>$root = 316</code>. Cool, we just skipped uselessly squaring <code>1 .. 315</code></del> EDIT: This should be 100. I had manually calculated it without subtracting 1 as in my code above. Oops!/EDIT (and possibly checking the squares to see if we satisfied the challenge condition, depending on how you wrote your code).</p>
 
 <p>Next, we have to loop until we find a perfect square which has at least <code>$n</code> unique digits. So I wrote my loop like so:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">while</span> ( <span style="color:#ae81ff">1</span> ) {
