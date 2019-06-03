@@ -6,10 +6,22 @@
     <description>Recent content on Yozen Hernandez</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 May 2019 09:25:05 -0400</lastBuildDate>
+    <lastBuildDate>Sun, 02 Jun 2019 13:49:47 -0400</lastBuildDate>
     
 	<atom:link href="https://yzhernand.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Perl Weekly Challenge 10: Roman numerals and Jaro-Winkler distance</title>
+      <link>https://yzhernand.github.io/posts/perl-weekly-challenge-10/</link>
+      <pubDate>Sun, 02 Jun 2019 13:49:47 -0400</pubDate>
+      
+      <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-10/</guid>
+      <description>Back at it again with another week of the Perl Weekly Challenge. This time for challenge #10
+Challenge #1  Write a script to encode/decode Roman numerals. For example, given Roman numeral CCXLVI, it should return 246. Similarly, for decimal number 39, it should return XXXIX.
+ I made the following assumptions for this challenge:
+ Valid Roman Numerals follow the &amp;ldquo;Subtractive notation&amp;rdquo; convention mentioned on the Wikipedia page. Only one leading subtractive character is allowed (eg, &amp;lsquo;VIII&amp;rsquo; for &amp;lsquo;8&amp;rsquo;, but not &amp;lsquo;IIX&amp;rsquo;).</description>
+    </item>
     
     <item>
       <title>Perl Weekly Challenge 9</title>

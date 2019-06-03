@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Perl Weekly Challenge 10: Roman numerals and Jaro-Winkler distance // Yozen Hernandez</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Yozen Hernandez" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://yzhernand.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Perl Weekly Challenge 10: Roman numerals and Jaro-Winkler distance"/>
+<meta name="twitter:description" content="Back at it again with another week of the Perl Weekly Challenge. This time for challenge #10
+Challenge #1  Write a script to encode/decode Roman numerals. For example, given Roman numeral CCXLVI, it should return 246. Similarly, for decimal number 39, it should return XXXIX.
+ I made the following assumptions for this challenge:
+ Valid Roman Numerals follow the &ldquo;Subtractive notation&rdquo; convention mentioned on the Wikipedia page. Only one leading subtractive character is allowed (eg, &lsquo;VIII&rsquo; for &lsquo;8&rsquo;, but not &lsquo;IIX&rsquo;)."/>
+
+    <meta property="og:title" content="Perl Weekly Challenge 10: Roman numerals and Jaro-Winkler distance" />
+<meta property="og:description" content="Back at it again with another week of the Perl Weekly Challenge. This time for challenge #10
+Challenge #1  Write a script to encode/decode Roman numerals. For example, given Roman numeral CCXLVI, it should return 246. Similarly, for decimal number 39, it should return XXXIX.
+ I made the following assumptions for this challenge:
+ Valid Roman Numerals follow the &ldquo;Subtractive notation&rdquo; convention mentioned on the Wikipedia page. Only one leading subtractive character is allowed (eg, &lsquo;VIII&rsquo; for &lsquo;8&rsquo;, but not &lsquo;IIX&rsquo;)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yzhernand.github.io/posts/perl-weekly-challenge-10/" />
+<meta property="article:published_time" content="2019-06-02T13:49:47-04:00"/>
+<meta property="article:modified_time" content="2019-06-02T13:49:47-04:00"/>
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://yzhernand.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Yozen Hernandez" /></a>
+      <h1>Yozen Hernandez</h1>
+      <p>Bioinformatics guy who programs in Perl, C, and R. Occasionally writes about things.</p>
+      <div class="app-header-social">
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Perl Weekly Challenge 10: Roman numerals and Jaro-Winkler distance</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jun 2, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          7 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<p>Back at it again with another week of the Perl Weekly Challenge. This time for challenge #10</p>
+
+<h1 id="challenge-1">Challenge #1</h1>
+
+<blockquote>
+<p>Write a script to encode/decode Roman numerals.
+For example, given Roman numeral CCXLVI, it should return 246.
+Similarly, for decimal number 39, it should return XXXIX.</p>
+</blockquote>
+
+<p>I made the following assumptions for this challenge:</p>
+
+<ol>
+<li>Valid Roman Numerals follow the &ldquo;Subtractive notation&rdquo; convention mentioned on the <a href="https://en.wikipedia.org/wiki/Roman_numerals">Wikipedia page</a>.</li>
+<li>Only one leading subtractive character is allowed (eg, &lsquo;VIII&rsquo; for &lsquo;8&rsquo;, but not &lsquo;IIX&rsquo;).</li>
+<li>The maximum representable value is 3,999.</li>
+<li>No unicode characters would be used as input (ASCII only)</li>
+</ol>
+
+<p>I thought about a few ways of doing this, notably using a <a href="https://en.wikipedia.org/wiki/Pushdown_automaton">PDA</a>. It would have been fun to challenge myself with that, but this week I only had a few hours do the challenge, so I went for the quickest thing I could throw together.</p>
+
+<h2 id="roman-numeral-arabic-integer">Roman numeral -&gt; Arabic integer</h2>
+
+<p>The first step I wanted to take was to cut down the work I might need to do, particularly with respect to validation. We all know how important checking for valid input is. Thanks to StackOverflow again for supplying lazy developers everywhere with a place to <del>steal code from</del> look to for inspiration. Anyway, user &lsquo;paxdiablo&rsquo; <a href="https://stackoverflow.com/a/267405/876844">posted</a> a nice regex for valid Roman numerals, along with an explanation on how it works.</p>
+
+<p>I used two hashes to store Roman numeral values: one to give me the value of each numeral (numerals as keys and numeric values as values), and the second to translate from integer values to numerals. The second hash had multi-character numerals to make my life easier:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">my</span> %roman_vals <span style="color:#f92672">=</span> (
+    <span style="color:#e6db74">&#39;I&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">1</span>,
+    <span style="color:#e6db74">&#39;V&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">5</span>,
+    <span style="color:#e6db74">&#39;X&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">10</span>,
+    <span style="color:#e6db74">&#39;L&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">50</span>,
+    <span style="color:#e6db74">&#39;C&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">100</span>,
+    <span style="color:#e6db74">&#39;D&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">500</span>,
+    <span style="color:#e6db74">&#39;M&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">1000</span>,
+);
+
+<span style="color:#66d9ef">my</span> %val_to_roman <span style="color:#f92672">=</span> (
+    <span style="color:#ae81ff">1</span>    <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;I&#39;</span>,
+    <span style="color:#ae81ff">4</span>    <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;IV&#39;</span>,
+    <span style="color:#ae81ff">5</span>    <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;V&#39;</span>,
+    <span style="color:#ae81ff">9</span>    <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;IX&#39;</span>,
+    <span style="color:#ae81ff">10</span>   <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;X&#39;</span>,
+    <span style="color:#ae81ff">40</span>   <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;XL&#39;</span>,
+    <span style="color:#ae81ff">50</span>   <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;L&#39;</span>,
+    <span style="color:#ae81ff">90</span>   <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;XC&#39;</span>,
+    <span style="color:#ae81ff">100</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;C&#39;</span>,
+    <span style="color:#ae81ff">400</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;CD&#39;</span>,
+    <span style="color:#ae81ff">500</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;D&#39;</span>,
+    <span style="color:#ae81ff">900</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;CM&#39;</span>,
+    <span style="color:#ae81ff">1000</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;M&#39;</span>,
+);</code></pre></div>
+<p>The code to convert a Roman numeral to an integer representation in Arabic numerals is a bit convoluted. But makes sense when broken down.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">    <span style="color:#75715e"># Traverse string from left to right.</span>
+    <span style="color:#75715e"># Assume subtractive notation and increment while</span>
+    <span style="color:#75715e"># the value is the same or decreasing. Subtract</span>
+    <span style="color:#75715e"># from current if value increases.</span>
+    <span style="color:#75715e"># Assumes regex above allows only valid numerals</span>
+    <span style="color:#66d9ef">for</span> ( <span style="color:#66d9ef">my</span> $r <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; $r <span style="color:#f92672">&lt;</span> @roman_arr; ) {
+        <span style="color:#66d9ef">my</span> $curr <span style="color:#f92672">=</span> $roman_arr[$r];
+        $val <span style="color:#f92672">=</span> $roman_vals{ $roman_arr[$r] };
+
+        <span style="color:#75715e"># Consume all of the same value, adding along the way</span>
+        <span style="color:#66d9ef">while</span> ( <span style="color:#f92672">++</span>$r <span style="color:#f92672">&lt;</span> @roman_arr <span style="color:#f92672">&amp;&amp;</span> $curr <span style="color:#f92672">eq</span> $roman_arr[$r] ) {
+            $val <span style="color:#f92672">+=</span> $roman_vals{ $roman_arr[$r] };
+        }
+
+        <span style="color:#75715e"># If there&#39;s still more of the array, and the next</span>
+        <span style="color:#75715e"># value is greater than that of the current symbol,</span>
+        <span style="color:#75715e"># subtract value of current symbol. That is the new</span>
+        <span style="color:#75715e"># current value.</span>
+        <span style="color:#75715e"># This actually ignores the &#34;extra&#34; symbols in something</span>
+        <span style="color:#75715e"># like IIIX, which would be considered invalid anyway.</span>
+        <span style="color:#66d9ef">if</span> (   $r <span style="color:#f92672">&lt;</span> @roman_arr
+            <span style="color:#f92672">&amp;&amp;</span> $roman_vals{$curr} <span style="color:#f92672">&lt;</span> $roman_vals{ $roman_arr[$r] } )
+        {
+            $val <span style="color:#f92672">=</span> $roman_vals{ $roman_arr[$r] } <span style="color:#f92672">-</span> $roman_vals{$curr};
+            <span style="color:#f92672">++</span>$r;
+        }
+
+        $decoded <span style="color:#f92672">+=</span> $val;
+    }</code></pre></div>
+<p>Basically I split the numeral&rsquo;s string into an array and traverse it from left-to-right, consuming characters as long as the value of the current character is the same (or the end of the array is reached).</p>
+
+<p>This means if you have something like this: <code>XXXVII</code>, the code will pick up the <code>X</code>, and walk along the array until it hits the <code>V</code>. All along, it keeps a sum of the value of <code>X</code> (10). As soon as it hits the <code>V</code>, it starts to keep track of a new sum, adding the old sum to the total. And so on.</p>
+
+<p>Why do it that way? Because suppose the string looked like this: <code>XXXIVI</code>. While processing the <code>X</code>&rsquo;s, it runs into an <code>I</code>, and <code>I ne X</code>. The value accumulated so far is added to the total, and a new sum is started. However, the next character is <code>V</code>. Now we make a decision: is this new value greater than the current character&rsquo;s value? If so, subtract from the new character&rsquo;s value and increment the counter so we skip this character next time. Otherwise we just move on and iterate again.</p>
+
+<p>In this case, it takes <code>V = 5</code> and subtracts <code>I = 1</code> from that, saving a value of 4. Then we jump past the &lsquo;V&rsquo; and loop again. The next character is <code>I</code>, its sum is kept, and then the end of the array is reached, so that value (1) is added to the running total.</p>
+
+<h2 id="arabic-integers-roman-numerals">Arabic integers -&gt; Roman numerals</h2>
+
+<p>Converting an int to a Roman numeral was surprisingly easy.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">int_to_roman</span> {
+    <span style="color:#66d9ef">my</span> $int <span style="color:#f92672">=</span> shift;
+    croak <span style="color:#e6db74">&#34;Error: Integer exceeds maximum representable value.&#34;</span>
+        <span style="color:#66d9ef">if</span> $int <span style="color:#f92672">&gt;</span> MAX_INT;
+
+    <span style="color:#66d9ef">my</span> $str;
+    <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">my</span> $val ( sort ( { $b <span style="color:#e6db74">&lt;=&gt;</span> $a } keys %val_to_roman ) ) {
+
+        <span style="color:#75715e"># Must find the largest numeral which can be subtracted</span>
+        <span style="color:#66d9ef">while</span> ( $val <span style="color:#f92672">&lt;=</span> $int ) {
+            $int <span style="color:#f92672">-=</span> $val;
+            $str <span style="color:#f92672">.=</span> $val_to_roman{$val};
+        }
+    }
+
+    <span style="color:#66d9ef">return</span> $str;
+}</code></pre></div>
+<p>I set <code>MAX_INT</code> to be 3,999 since that is the largest value representable in &ldquo;subtractive notation&rdquo;. After that, I just find the largest numeral value which can be subtracted from the int, and just keep subtracting it as many times as I can, concatenating the numeral to a string as I go.</p>
+
+<p>Since the <code>val_to_roman</code> hash includes compound numerals, like <code>IX</code>, I can be sure my output also obeys the convention of subtractive notation.</p>
+
+<p>Check out my full solution <a href="https://github.com/manwar/perlweeklychallenge-club/blob/master/challenge-010/yozen-hernandez/perl5/ch-1.pl">here</a>.</p>
+
+<h1 id="challenge-2">Challenge 2</h1>
+
+<blockquote>
+<p>Write a script to find Jaro-Winkler distance between two strings.</p>
+</blockquote>
+
+<p>During my time in a PhD program, I had to work a lot with alignment algorithms. But I was used to working in C, and never with an algorithm that had to keep track of transpositions, so this threw me off for a bit. After reading the <a href="https://files.eric.ed.gov/fulltext/ED325505.pdf">paper by Winkler</a> on his modification of Jaro&rsquo;s algorithm, I understood it a bit more (the <a href="https://en.wikipedia.org/wiki/Jaro–Winkler_distance">Wikipedia page</a> was a little too high level for me to properly implement it).</p>
+
+<p>I won&rsquo;t go over details into the algorithm itself, you can check out the Wikipedia page and the paper I linked above for more on that. Though I may write a post on this which is more in-depth later.</p>
+
+<p>I don&rsquo;t have much to say about my implementation apart from the fact that I think its much more how I might code it in C and could probably be much more &ldquo;Perl-y&rdquo;. About the &ldquo;Perliest&rdquo; thing I did in it was my code to extract the characters with matches from each string:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">    <span style="color:#75715e"># Get only the matching characters from each string.</span>
+    @s1_matches <span style="color:#f92672">=</span> @s1[ grep { $s1_matches[$_] } <span style="color:#ae81ff">0</span> <span style="color:#f92672">..</span> @s1_matches ];
+    @s2_matches <span style="color:#f92672">=</span> @s2[ grep { $s2_matches[$_] } <span style="color:#ae81ff">0</span> <span style="color:#f92672">..</span> @s2_matches ];
+    <span style="color:#66d9ef">my</span> $matches <span style="color:#f92672">=</span> @s1_matches;</code></pre></div>
+<p>The <code>@s*_matches</code> arrays are arrays of 0/1 flags, as long as each string. So I filter out only the indices in those arrays for which the value is 1, and use those indices to take a slice of the string arrays (<code>@s*</code>). I save those again in the <code>@s*_matches</code> arrays so I just have the matching positions.</p>
+
+<p>For example, in the strings &ldquo;DWAYNE&rdquo; and &ldquo;DUANE&rdquo;, I get a match array for &ldquo;DWAYNE&rdquo; that look as follows: <code>(1, undef, 1, undef, 1, 1)</code>. Every 1 indicates a place where the character in that position found a match in &ldquo;DUANE&rdquo;. Applying the code above gives me the list <code>(D, A, N, E)</code>. Since this is the same array you would get from &ldquo;DUANE&rdquo; in this comparison, the number of transpositions is 0.</p>
+
+<p>Check out my full solution <a href="https://github.com/manwar/perlweeklychallenge-club/blob/master/challenge-010/yozen-hernandez/perl5/ch-2.pl">here</a>.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
