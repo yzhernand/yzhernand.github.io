@@ -6,10 +6,20 @@
     <description>Recent content on Yozen Hernandez</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 02 Jun 2019 13:49:47 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 05 Jun 2019 11:20:22 -0400</lastBuildDate>
     
 	<atom:link href="https://yzhernand.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Perl Weekly Challenge 11: Temperature Scales And Identity Matrices</title>
+      <link>https://yzhernand.github.io/posts/perl-weekly-challenge-11/</link>
+      <pubDate>Wed, 05 Jun 2019 11:20:22 -0400</pubDate>
+      
+      <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-11/</guid>
+      <description>Another Perl Weekly Challenge. I found this week&amp;rsquo;s challenges easier than last week&amp;rsquo;s, which is not bad as I don&amp;rsquo;t necessarily want to stress out over something that is meant to be a learning experience and to keep my skills up.
+Challenge 1  Write a script that computes the equal point in the Fahrenheit and Celsius scales, knowing that the freezing point of water is 32 °F and 0 °C, and that the boiling point of water is 212 °F and 100 °C.</description>
+    </item>
     
     <item>
       <title>Perl Weekly Challenge 10: Roman numerals and Jaro-Winkler distance</title>
