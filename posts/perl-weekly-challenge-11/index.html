@@ -52,7 +52,7 @@ Challenge 1  Write a script that computes the equal point in the Fahrenheit and 
   <title>clock</title>
   <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
 </svg>
-          3 min read
+          4 min read
         </div></div>
     </header>
     <div class="post-content">
@@ -125,7 +125,18 @@ m &amp;= \frac{\Delta y}{\Delta x}\newline
 
     <span style="color:#66d9ef">return</span> <span style="color:#f92672">\</span>@i_mat;
 }</code></pre></div>
-<p>If you know Perl, or any C-like actually, this should be fairly self-explanatory. Basically, given a value for <code>$n</code>, ensure that value is an integer. Then just generate <code>$n</code> arrays of size <code>$n</code> with all 0s. For the <code>$i</code>th array, flip the <code>$i</code>th position to a 1. Since this is Perl, the array is pushed on to another array as an arrayref. That array is then returned as an arrayref as well after loop termination.</p>
+<p>If you know Perl, or any C-like actually, this should be fairly self-explanatory. Basically, given a value for <code>$n</code>, ensure that value is an integer. Then just generate <code>$n</code> arrays of size <code>$n</code> with all 0&rsquo;s. For the <code>$i</code>th array, flip the <code>$i</code>th position to a 1. Since this is Perl, the array is pushed on to another array as an arrayref. That array is then returned as an arrayref as well after loop termination.</p>
+
+<p>UPDATE: If we wanted to scare people with our awesome Perl skills, we might have also written this as:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">ident_mat_compact</span> {
+    <span style="color:#66d9ef">my</span> $n <span style="color:#f92672">=</span> shift <span style="color:#f92672">or</span> croak <span style="color:#e6db74">&#34;Must supply an value for size of square matrix&#34;</span>;
+
+    <span style="color:#66d9ef">my</span> @i_mat;
+    <span style="color:#66d9ef">return</span> [map { <span style="color:#66d9ef">my</span> $i <span style="color:#f92672">=</span> $_;
+            [map { <span style="color:#ae81ff">0</span><span style="color:#f92672">+</span>($_ <span style="color:#f92672">==</span> $i)} ( <span style="color:#ae81ff">0</span> <span style="color:#f92672">..</span> $n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)];
+        } ( <span style="color:#ae81ff">0</span> <span style="color:#f92672">..</span> $n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> )];
+}</code></pre></div>
+<p>The inner map generates an array of 1&rsquo;s and 0&rsquo;s by mapping over the range <code>( 0 .. $n - 1)</code>. A 1 is produced only when <code>$_</code> is equal to <code>$i</code>. The <code>0+</code> (also known as the [Venus operator(<a href="https://metacpan.org/pod/perlsecret#Venus)]">https://metacpan.org/pod/perlsecret#Venus)]</a>) ensures the value will be interpreted as an integer value. The outer map also maps over the same range, but sets <code>$i = $_</code> so that the inner map can work unambiguously. Each map is surrounded by <code>[]</code> so that the list becomes a reference.</p>
 
 <p>Maybe I should start learning some Perl 6. I feel like all that stuff about lazy evaluation might come in handy here, particularly for very large values of <code>$n</code> in some real-world problems. If I could wrap my head around it.</p>
 
