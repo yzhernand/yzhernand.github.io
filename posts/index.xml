@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Yozen Hernandez</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Jun 2019 11:20:22 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 10 Jun 2019 13:51:38 -0400</lastBuildDate>
     
 	<atom:link href="https://yzhernand.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Perl Weekly Challenge 12: Euclid Numbers and Common Paths</title>
+      <link>https://yzhernand.github.io/posts/perl-weekly-challenge-12/</link>
+      <pubDate>Mon, 10 Jun 2019 13:51:38 -0400</pubDate>
+      
+      <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-12/</guid>
+      <description>Fun challenges this week! But first: I&amp;rsquo;m honored to be mentioned in the Perl Weekly Newletter for the second time now. I&amp;rsquo;m especially with by the very flattering notion that I&amp;rsquo;m somehow becoming popular with these posts. It&amp;rsquo;s enouraging me to make some time to write about things beyond just these challenges.
+Challenge 1  The numbers formed by adding one to the products of the smallest primes are called the Euclid Numbers (see wiki).</description>
+    </item>
     
     <item>
       <title>Perl Weekly Challenge 11: Temperature Scales And Identity Matrices</title>
