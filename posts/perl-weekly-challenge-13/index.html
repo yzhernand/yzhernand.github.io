@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Perl Weekly Challenge 13: Last Friday of the month / Mutually recursive methods // Yozen Hernandez</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Yozen Hernandez" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://yzhernand.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Perl Weekly Challenge 13: Last Friday of the month / Mutually recursive methods"/>
+<meta name="twitter:description" content="Note: I&rsquo;ve also posted this over on dev.to in case anyone wanted to leave any comments there.
+This week&rsquo;s Perl Weekly Challenge had two fairly fun challenges, and a 3rd API challenge that unfortunately needed an additional step I wasn&rsquo;t willing to take to participate in (the website required credit card details to use their API at any level).
+Challenge 1  Write a script to print the date of last Friday of every month of a given year."/>
+
+    <meta property="og:title" content="Perl Weekly Challenge 13: Last Friday of the month / Mutually recursive methods" />
+<meta property="og:description" content="Note: I&rsquo;ve also posted this over on dev.to in case anyone wanted to leave any comments there.
+This week&rsquo;s Perl Weekly Challenge had two fairly fun challenges, and a 3rd API challenge that unfortunately needed an additional step I wasn&rsquo;t willing to take to participate in (the website required credit card details to use their API at any level).
+Challenge 1  Write a script to print the date of last Friday of every month of a given year." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yzhernand.github.io/posts/perl-weekly-challenge-13/" />
+<meta property="article:published_time" content="2019-06-21T10:26:18-04:00"/>
+<meta property="article:modified_time" content="2019-06-21T10:26:18-04:00"/>
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://yzhernand.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Yozen Hernandez" /></a>
+      <h1>Yozen Hernandez</h1>
+      <p>Bioinformatics guy who programs in Perl, C, and R. Occasionally writes about things.</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/yzhernand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/yzhernand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Perl Weekly Challenge 13: Last Friday of the month / Mutually recursive methods</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jun 21, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          7 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<p>Note: I&rsquo;ve also posted this over on <a href="https://dev.to/yzhernand/perl-weekly-challenge-13-last-friday-of-the-month-mutually-recursive-methods-73f">dev.to</a> in case anyone wanted to leave any comments there.</p>
+
+<p>This week&rsquo;s <a href="https://perlweeklychallenge.org">Perl Weekly Challenge</a> had two fairly fun challenges, and a 3rd API challenge that unfortunately needed an additional step I wasn&rsquo;t willing to take to participate in (the website required credit card details to use their API at any level).</p>
+
+<h1 id="challenge-1">Challenge 1</h1>
+
+<blockquote>
+<p>Write a script to print the date of last Friday of every month of a given year.</p>
+</blockquote>
+
+<p>I chose to go the easy route for this challenge and just use the widely recommended <a href="https://metacpan.org/pod/DateTime">DateTime</a> module. There are some tasks for which it is simply better to use existing libraries where all of the heavy lifting has been done for you. Working with dates and time are such a situation.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">use</span> DateTime;
+<span style="color:#66d9ef">use</span> DateTime::Duration;
+
+<span style="color:#66d9ef">my</span> $year <span style="color:#f92672">=</span> shift <span style="color:#f92672">or</span> die <span style="color:#e6db74">&#34;Usage: $0 &lt;year&gt;\n&#34;</span>;
+
+<span style="color:#66d9ef">my</span> $dt <span style="color:#f92672">=</span> DateTime<span style="color:#f92672">-&gt;</span><span style="color:#66d9ef">new</span>(
+    month <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">1</span>,
+    day   <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">1</span>,
+    year  <span style="color:#f92672">=&gt;</span> $year
+);
+<span style="color:#66d9ef">my</span> $add_week <span style="color:#f92672">=</span> DateTime::Duration<span style="color:#f92672">-&gt;</span><span style="color:#66d9ef">new</span>( weeks <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">1</span> );
+<span style="color:#66d9ef">my</span> $add_day  <span style="color:#f92672">=</span> DateTime::Duration<span style="color:#f92672">-&gt;</span><span style="color:#66d9ef">new</span>( days  <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">1</span> );</code></pre></div>
+<p>In my solution, I take a fairly simple approach. In the block above, I set up a few variables: the year comes from the user on the command line, the <code>$dt</code> variable is a <code>DateTime</code> object that I will use as a sort of &ldquo;cursor&rdquo; to keep track of where we are in the year, and the last two variables (<code>$add_week</code> and <code>$add_day</code>) are <code>DateTime::Duration</code> objects for my convenience. I will use those two variables to &ldquo;walk&rdquo; along the dates in a year. You&rsquo;ll see what I mean below.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">while</span> ( $dt<span style="color:#f92672">-&gt;</span>day_of_week() <span style="color:#f92672">!=</span> <span style="color:#ae81ff">5</span> ) { $dt<span style="color:#f92672">-&gt;</span>add($add_day); }</code></pre></div>
+<p>In the set up block I showed earlier, <code>$dt</code> was initialized to be the first date in the given year, which is always January 1. The first while loop in this block adds (using <a href="https://metacpan.org/pod/DateTime#$dt-%3Eadd(-parameters-for-DateTime::Duration-)"><code>DateTime::add</code></a>) one day so long as the current date in <code>$dt</code> is not a Friday. So if January 1st was not a Friday, keep adding one day until we arrive at a Friday. If it was, we don&rsquo;t add any days at all.</p>
+
+<p>That&rsquo;s what the <code>$add_day</code> variable is used for. The <code>DateTime</code> module provides an alternative way of calling that function, allowing us to give the same parameters we needed to create a new <code>DateTime::Duration</code> object (eg, <code>$dt-&gt;add(days  =&gt; 1)</code>). This form of the call creates a new <code>DateTime::Duration</code> object on each invocation, which is why I decided to avoid it and instead keep an already initialized variable for this purpose. Even if some internal optimization were smart enough to eliminate any potential slowdown for me, I still prefer being explicit about what I am doing in the code.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">my</span> %last_fri;
+<span style="color:#66d9ef">while</span> ( $dt<span style="color:#f92672">-&gt;</span>year <span style="color:#f92672">==</span> $year ) {
+    $last_fri{ $dt<span style="color:#f92672">-&gt;</span>month } <span style="color:#f92672">=</span> $dt<span style="color:#f92672">-&gt;</span>ymd(<span style="color:#e6db74">&#34;/&#34;</span>);
+    $dt<span style="color:#f92672">-&gt;</span>add($add_week);
+}</code></pre></div>
+<p>Now we walk along by weeks (using <code>$add_week</code>, with the same motivations for using a variable as above). I use a hash and save the string representation of the date, in &ldquo;y/m/d&rdquo; format, of every Friday in the year using the numeric value of the month as the key. This gives the nice side effect of only saving the last Friday for the month, as the previous Fridays get overwritten so long as the month is the same, which is what the challenge asked us to do.</p>
+
+<p>We exit the loop when we move on to the next year.</p>
+
+<p>Finally, we print the results:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">{
+    local $, <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;\n&#34;</span>;
+    say @last_fri{ sort { $a <span style="color:#e6db74">&lt;=&gt;</span> $b } keys %last_fri };
+}</code></pre></div>
+<p>The above could have been a one-liner, but I wanted to make use of a feature that maybe not everyone is aware of. That is, the setting of the <code>$,</code> variable (also called <code>$OFS</code>) locally. The curly braces are used to start a new block, and we use the <code>local</code> keyword to tell perl that we want to use an existing variable name, but we will be making a local copy of it so we can safely change its value within this block. Now, printing with <code>say</code> will separate each of its arguments with &ldquo;\n&rdquo; (normally, <code>$,</code> is set to <code>undef</code>). Note that the above could have been achieved with a simple <code>join</code> using &ldquo;\n&rdquo; as the separator, but the above form would come in handy if we needed to print several lists with the same separator, and wanted to save on the keystrokes.</p>
+
+<p>I numerically sort the keys of my hash so that the dates are printed out as specified in the challenge.</p>
+
+<h1 id="challenge-2">Challenge 2</h1>
+
+<blockquote>
+<p>Write a script to demonstrate Mutually Recursive methods. Two methods are
+mutually recursive if the first method calls the second and the second calls
+first in turn. Using the mutually recursive methods, generate <a href="https://en.wikipedia.org/wiki/Hofstadter_sequence#Hofstadter_Female_and_Male_sequences">Hofstadter Female and Male sequences</a>.</p>
+</blockquote>
+
+<p>Recursive methods can be fun to write, but I&rsquo;ve never done mutually recursive methods. This was a deceptively easy challenge. Once I wrote it, I sort of thought to myself &ldquo;that can&rsquo;t be all, right?&rdquo;. So of course, I jazzed it up a bit:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">use</span> feature <span style="color:#e6db74">qw(say state)</span>;
+
+<span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">hofstadter_F</span> {
+    <span style="color:#66d9ef">my</span> $n <span style="color:#f92672">=</span> shift;
+    state %cache <span style="color:#f92672">=</span> ( <span style="color:#ae81ff">0</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">1</span> );
+
+    <span style="color:#66d9ef">return</span> $cache{$n} <span style="color:#66d9ef">if</span> exists $cache{$n};
+    <span style="color:#66d9ef">return</span> $cache{$n} <span style="color:#f92672">=</span> $n <span style="color:#f92672">-</span> hofstadter_M( hofstadter_F( $n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ) );
+}
+
+<span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">hofstadter_M</span> {
+    <span style="color:#66d9ef">my</span> $n <span style="color:#f92672">=</span> shift;
+    state %cache <span style="color:#f92672">=</span> ( <span style="color:#ae81ff">0</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span> );
+
+    <span style="color:#66d9ef">return</span> $cache{$n} <span style="color:#66d9ef">if</span> exists $cache{$n};
+    <span style="color:#66d9ef">return</span> $cache{$n} <span style="color:#f92672">=</span> $n <span style="color:#f92672">-</span> hofstadter_F( hofstadter_M( $n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ) );
+}</code></pre></div>
+<p>First thing to notice, is that the bodies of each function have calls to the other. This sort of thing just works. So&hellip;let&rsquo;s just leave it at that.</p>
+
+<p>The more interesting thing, is the use of a hash which I uncreatively called <code>%cache</code> because it is&hellip;a cache! Without this cache, we must do all the work of calculating the intermediate values of the functions on each call. Why is that important?</p>
+
+<p>The Hofstadter Female and Male functions produce sequences, which means that we might need to call them <em>n</em> times to get the first <em>n</em> terms. If we call them 10 times, you might not notice any need for improvement of performance. But if you wanted a sequence of the first 100 values, you&rsquo;ll notice you&rsquo;ll need to wait a while.</p>
+
+<p>Enter <code>state</code>, which we enable using <code>use feature 'state';</code>. Similar to my <a href="https://yzhernand.github.io/posts/perl-weekly-challenge-12/">previous blog post</a> where I talked about closures, <code>state</code> is a way of keeping the state of a variable across function calls. Instead of returning an anonymous sub which keeps its own state, however, <code>state</code> allows us to keep the state of a variable in a named function, without needing to keep another reference to it.</p>
+
+<p>In each function, I initialize the cache hashes to contain the value for the base call (<code>F(0)</code> or <code>M(0)</code>). Then, on each call, the hash is checked to see if we have already computed the value of the *n*th term in the sequence. If so, it is returned. Otherwise, we make the appropriate call to calculate it, and save it into the cache while also returning it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">my</span> $n <span style="color:#f92672">=</span> shift <span style="color:#f92672">or</span> die <span style="color:#e6db74">&#34;Usage: $0 &lt;n&gt;\n&#34;</span>;
+
+say <span style="color:#e6db74">&#34;F: &#34;</span>, join( <span style="color:#e6db74">&#34;, &#34;</span>, map { hofstadter_F($_) } ( <span style="color:#ae81ff">0</span> <span style="color:#f92672">..</span> $n ) );
+say <span style="color:#e6db74">&#34;M: &#34;</span>, join( <span style="color:#e6db74">&#34;, &#34;</span>, map { hofstadter_M($_) } ( <span style="color:#ae81ff">0</span> <span style="color:#f92672">..</span> $n ) );</code></pre></div>
+<p>On my machine, without using a cache, calling both functions with <code>$n = 100</code> results in a total runtime of nearly 31 seconds! With the cache, the program ran in under 40ms and was done in a literal blink of an eye. Bumping it up to 10000 took 90ms. I did not try that value of <em>n</em> without a cache.</p>
+
+<p>A core module called <a href="https://metacpan.org/pod/Memoize"><code>Memoize</code></a> does this sort of caching for you, under certain conditions. The POD page is well worth a read. I could have done the above by using <code>Memoize</code>, but then I might not have had the opportunity to provide an example to write about :).</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

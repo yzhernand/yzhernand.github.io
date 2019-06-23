@@ -3,6 +3,23 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://yzhernand.github.io/posts/perl-weekly-challenge-13/</loc>
+    <lastmod>2019-06-21T10:26:18-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yzhernand.github.io/posts/</loc>
+    <lastmod>2019-06-21T10:26:18-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://yzhernand.github.io/</loc>
+    <lastmod>2019-06-21T10:26:18-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://yzhernand.github.io/pres-lmtx/</loc>
     <lastmod>2019-06-17T18:16:15-04:00</lastmod>
   </url>
@@ -10,18 +27,6 @@
   <url>
     <loc>https://yzhernand.github.io/posts/perl-weekly-challenge-12/</loc>
     <lastmod>2019-06-10T13:51:38-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://yzhernand.github.io/posts/</loc>
-    <lastmod>2019-06-10T13:51:38-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://yzhernand.github.io/</loc>
-    <lastmod>2019-06-10T13:51:38-04:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
