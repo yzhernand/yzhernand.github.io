@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Yozen Hernandez</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Jun 2019 10:26:18 -0400</lastBuildDate>
+    <lastBuildDate>Sun, 30 Jun 2019 12:01:08 -0400</lastBuildDate>
     
 	<atom:link href="https://yzhernand.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Perl Weekly Challenge 14: van Eck’s sequence / Adventures in overthinking- making words from US state initials</title>
+      <link>https://yzhernand.github.io/posts/perl-weekly-challenge-14/</link>
+      <pubDate>Sun, 30 Jun 2019 12:01:08 -0400</pubDate>
+      
+      <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-14/</guid>
+      <description>Warning This post ended up being pretty long. A million thanks if you make it through to the end.
+This week&amp;rsquo;s Perl Weekly Challenge offered two very nice challenges that I really had to think about. Later in the week, Neil Bowers, who is credited with suggesting the second challenge, posted about an additional challenge since his submission was misunderstood.
+Now with that out of the way, let me walk you through how I approached these challenges.</description>
+    </item>
     
     <item>
       <title>Perl Weekly Challenge 13: Last Friday of the month / Mutually recursive methods</title>

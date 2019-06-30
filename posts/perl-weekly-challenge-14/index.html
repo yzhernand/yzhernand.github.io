@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Perl Weekly Challenge 14: van Eck’s sequence / Adventures in overthinking- making words from US state initials // Yozen Hernandez</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Yozen Hernandez" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://yzhernand.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Perl Weekly Challenge 14: van Eck’s sequence / Adventures in overthinking- making words from US state initials"/>
+<meta name="twitter:description" content="Warning This post ended up being pretty long. A million thanks if you make it through to the end.
+This week&rsquo;s Perl Weekly Challenge offered two very nice challenges that I really had to think about. Later in the week, Neil Bowers, who is credited with suggesting the second challenge, posted about an additional challenge since his submission was misunderstood.
+Now with that out of the way, let me walk you through how I approached these challenges."/>
+
+    <meta property="og:title" content="Perl Weekly Challenge 14: van Eck’s sequence / Adventures in overthinking- making words from US state initials" />
+<meta property="og:description" content="Warning This post ended up being pretty long. A million thanks if you make it through to the end.
+This week&rsquo;s Perl Weekly Challenge offered two very nice challenges that I really had to think about. Later in the week, Neil Bowers, who is credited with suggesting the second challenge, posted about an additional challenge since his submission was misunderstood.
+Now with that out of the way, let me walk you through how I approached these challenges." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yzhernand.github.io/posts/perl-weekly-challenge-14/" />
+<meta property="article:published_time" content="2019-06-30T12:01:08-04:00"/>
+<meta property="article:modified_time" content="2019-06-30T12:01:08-04:00"/>
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://yzhernand.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Yozen Hernandez" /></a>
+      <h1>Yozen Hernandez</h1>
+      <p>Bioinformatics guy who programs in Perl, C, and R. Occasionally writes about things.</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/yzhernand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/yzhernand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Perl Weekly Challenge 14: van Eck’s sequence / Adventures in overthinking- making words from US state initials</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jun 30, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          13 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<p><strong>Warning</strong> This post ended up being pretty long. A million thanks if you make it through to the end.</p>
+
+<p>This week&rsquo;s <a href="https://perlweeklychallenge.org/blog/perl-weekly-challenge-014/">Perl Weekly Challenge</a> offered two very nice challenges that I really had to think about. Later in the week, Neil Bowers, who is credited with suggesting the second challenge, <a href="http://neilb.org/2019/06/24/additional-challenge-14.html">posted</a> about an additional challenge since his submission was misunderstood.</p>
+
+<p>Now with that out of the way, let me walk you through how I approached these challenges.</p>
+
+<h1 id="challenge-1">Challenge 1</h1>
+
+<blockquote>
+<p>Write a script to generate Van Eck’s sequence starts with 0. For more information, please check out wikipedia <a href="https://en.wikipedia.org/wiki/Van_Eck%27s_sequence">page</a>. This challenge was proposed by team member Andrezgz.</p>
+</blockquote>
+
+<p>Another week, another numeric sequence :). van Eck&rsquo;s sequence is a bit trickier than other sequences I&rsquo;ve generated in previous challenges (see my posts on <a href="https://yzhernand.github.io/posts/perl-weekly-challenge-9/">challenge 9</a> where I simply generate squares, <a href="https://yzhernand.github.io/posts/perl-weekly-challenge-12/">challenge 12</a> which discusses <a href="https://en.wikipedia.org/wiki/Euclid_number">Euclid numbers</a>, and <a href="https://yzhernand.github.io/posts/perl-weekly-challenge-13/">challenge 13</a> which discusses <a href="https://en.wikipedia.org/wiki/Hofstadter_sequence#Hofstadter_Female_and_Male_sequences">Hofstadter Female and Male sequences</a>), as we will see.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">van_eck_seq</span> ( $n, $init = 0 ) {
+
+    <span style="color:#75715e"># Base case. It should always be $init followed</span>
+    <span style="color:#75715e"># by 0, given the definition.</span>
+    <span style="color:#66d9ef">return</span> ( $init, <span style="color:#ae81ff">0</span> ) <span style="color:#66d9ef">if</span> ( $n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> );
+
+    <span style="color:#66d9ef">my</span> @seq <span style="color:#f92672">=</span> van_eck_seq( $n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, $init );
+    <span style="color:#66d9ef">my</span> $m   <span style="color:#f92672">=</span> first { $seq[$_] <span style="color:#f92672">==</span> $seq[$n] } reverse( <span style="color:#ae81ff">0</span> <span style="color:#f92672">..</span> ( $n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ) );
+    <span style="color:#66d9ef">my</span> $val <span style="color:#f92672">=</span> ( defined $m ) ? ( $n <span style="color:#f92672">-</span> $m ) : <span style="color:#ae81ff">0</span>;
+
+    <span style="color:#66d9ef">return</span> @seq, $val;
+}</code></pre></div>
+<p>Going by the definition of the sequence on Wikipedia,</p>
+
+<blockquote>
+<p>\(a_0 = 0\). Then, for \(n ≥ 0\), if there exists an \(m &lt; n\) such that \(a_{m} = a_n\), take the largest such \(m\) and set \(a_{n+1} = n − m\); otherwise \(a_{n+1} = 0\).</p>
+</blockquote>
+
+<p>I thought of this as &ldquo;each \(n\)th term generates the \(n+1\)th term&rdquo;. So, if you call the function I&rsquo;ve written above with <code>van_eck_seq(2)</code> you would get the first 3 elements of the sequence, not the first 2. This is important because I&rsquo;ve written the function to be recursive, and the code following the nested call expects that the list it gets back includes the &ldquo;current&rdquo; \(n
+\)th term.</p>
+
+<p>Also by that definition, it looks like \(a_1 = 0\) since there is never an \(m &lt; n\) such that \(a_{m} = a_n\). The base case of <code>van_eck_seq(0)</code>, therefore, returns a list with items <code>(0, 0)</code>.</p>
+
+<p>Actually, that&rsquo;s not totally true: van Eck&rsquo;s sequence can have a different \(a_0\) term, which changes the sequence. So my function definition allows an optional setting of that term as it&rsquo;s second argument, <code>$init</code>.</p>
+
+<p>Continuing, for all \(n \geq 1\), we make a nested call to the same function, passing it <code>$n-1</code> and the value of <code>$init</code> (in case the caller changed it) and use the returned sequence to generate the next value.</p>
+
+<p>This line:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">my</span> $m   <span style="color:#f92672">=</span> first { $seq[$_] <span style="color:#f92672">==</span> $seq[$n] } reverse( <span style="color:#ae81ff">0</span> <span style="color:#f92672">..</span> ( $n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ) );</code></pre></div>
+<p>lets us walk backward through the sequence we got from the nested call so we can find that \(m &lt; n\) mentioned in the definition, if any. The value of <code>$val</code> depends on whether or not such an \(m\) was found, and then the combined sequence is returned. The function can be called like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">local $, <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;, &#34;</span>;
+say van_eck_seq(<span style="color:#ae81ff">10</span>);</code></pre></div>
+<p>which gives as output:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">0, 0, 1, 0, 2, 0, 2, 2, 1, 6, 0, 5</pre></div>
+<p>For this challenge, I used the <code>Memoize</code> module instead of caching myself (see my <a href="https://yzhernand.github.io/posts/perl-weekly-challenge-13/">post</a> on last week&rsquo;s challenge). I also documented the behavior that the function call returns a list of n+1 elements, as a person who would want to use that function might not expect that.</p>
+
+<p>See the full solution, <a href="https://github.com/manwar/perlweeklychallenge-club/tree/master/challenge-014/yozen-hernandez/perl5/ch-1.pl">here</a>.</p>
+
+<h1 id="challenge-2">Challenge 2</h1>
+
+<blockquote>
+<p>Using only the official postal (2-letter) abbreviations for the 50 U.S. states, write a script to find the longest English word you can spell? Here is the list of U.S. states abbreviations as per wikipedia page. This challenge was proposed by team member Neil Bowers.</p>
+</blockquote>
+
+<p>Turns out that this challenge wasn&rsquo;t quite what Neil intended, but I think most of us participants are going to solve it as-is. Further below I write about my solution to his actually intended challenge.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">my</span> %longest_word <span style="color:#f92672">=</span> ( words <span style="color:#f92672">=&gt;</span> <span style="color:#f92672">[]</span>, length <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span> );
+
+<span style="color:#75715e">#...</span>
+open <span style="color:#66d9ef">my</span> $wl, <span style="color:#e6db74">&#34;&lt;&#34;</span>, <span style="color:#e6db74">&#34;/usr/share/dict/words&#34;</span>;
+<span style="color:#66d9ef">while</span> ( <span style="color:#66d9ef">my</span> $w <span style="color:#f92672">=</span> <span style="color:#e6db74">&lt;$wl&gt;</span> ) {
+
+    <span style="color:#75715e"># Chomp and drop apostrophes or any other</span>
+    <span style="color:#75715e"># non-alphabetical characters</span>
+    chomp $w;
+    <span style="color:#66d9ef">my</span> $w_alpha <span style="color:#f92672">=</span> $w;
+    $w_alpha <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/[^[:alpha:]]//g</span>;
+
+    <span style="color:#75715e"># Skip unless length is even: all US state codes are bigrams</span>
+    <span style="color:#66d9ef">next</span> <span style="color:#66d9ef">unless</span> ( length($w_alpha) % 2 <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> );
+
+    <span style="color:#75715e"># Use unpack to split word into an array of bigrams</span>
+    <span style="color:#75715e"># and use UC to make it all uppercase</span>
+    <span style="color:#66d9ef">my</span> @w_split <span style="color:#f92672">=</span> unpack <span style="color:#e6db74">&#34;(a2)*&#34;</span>, uc($w_alpha);
+
+    <span style="color:#75715e"># Skip if the set created from the word is not a</span>
+    <span style="color:#75715e"># proper subset of the US state codes list.</span>
+    <span style="color:#66d9ef">next</span> <span style="color:#66d9ef">unless</span> all { exists $us_states_to_val{$_} } @w_split;
+
+    <span style="color:#75715e"># By now, we can be sure that the word is only</span>
+    <span style="color:#75715e"># composed of elements in the us_states list.</span>
+    <span style="color:#66d9ef">if</span> ( length($w_alpha) <span style="color:#f92672">&gt;</span> $longest_word{length} ) {
+        @longest_word{<span style="color:#e6db74">qw(words length)</span>} <span style="color:#f92672">=</span> ( [$w], length($w) );
+    }
+    <span style="color:#66d9ef">elsif</span> ( length($w_alpha) <span style="color:#f92672">==</span> $longest_word{length} ) {
+        push $longest_word{words}<span style="color:#f92672">-&gt;</span>@<span style="color:#960050;background-color:#1e0010">*</span>, $w;
+    }
+}</code></pre></div>
+<p>We start with a list of US states (not shown) and use a hash to store the length of the longest word seen and a list of those words, since there may be more than one. The length value is initialized to 0.</p>
+
+<p>We skip all odd-length strings, because US state codes are all 2 letters long (bigrams). I tried using <code>unpack</code> for the first time ever because it looked like a nice way to generate a list of bigrams from a string. Then we reject any words which have a bigram which is not in the list of US state codes.</p>
+
+<p>The final bit of code is just an if-elsif branch which checks if the word we found is longer than the longest seen so far. If it is, we basically reset the hash and store the word and new longest length. If it is the same, then we push the word onto the arrayref in the &ldquo;words&rdquo; value of the hash. Shorter words are just ignored.</p>
+
+<p>I peeked at a few other solutions to this challenge after I was done. I think I like some of them better because they are more concise, but then I do like to break things up so that I can see what everything is doing a bit more easily. I suspect that performance is similar between the solutions, but I haven&rsquo;t done any benchmarking to check.</p>
+
+<p>With the wordlist dictionary on Arch Linux, this script gives the following output:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">Longest word(s) constructed using USPS state codes: armorial, calamari, calamine, coalmine, Concorde, Denmark&#39;s, Ganymede, landmine, mainland, malarial, Mandarin, mandarin, melamine, memorial, mescalin, moorland
+with a length of 8 alphabetical characters</pre></div>
+<p>and using the alphabetic-only list from <a href="https://github.com/dwyl/english-words">https://github.com/dwyl/english-words</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">Longest word(s) constructed using USPS state codes: cacogalactia
+with a length of 12 alphabetical characters</pre></div>
+<p>See the full solution, <a href="https://github.com/manwar/perlweeklychallenge-club/tree/master/challenge-014/yozen-hernandez/perl5/ch-2.pl">here</a>.</p>
+
+<h1 id="additional-challenge-2">Additional Challenge 2</h1>
+
+<blockquote>
+<p>What&rsquo;s the longest word you can spell by traversing US states, taking the initial or initials of the states as you pass through them, without revisiting any states?</p>
+</blockquote>
+
+<p>Ok so this one made me tear out my hair a little. I am a little jealous of others&rsquo; solutions which seemed much simpler than mine. But I am also a bit proud of the overengineering since I got to use some concepts in CS that I haven&rsquo;t really used since my undergrad.</p>
+
+<p>When I first read the problem statement, I immediately thought of a <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">graph</a>. Basically, a graph is a data structure where things (usually strings, or another object of some sort) are connected to other things in some way. The &ldquo;things&rdquo; are called &ldquo;vertices&rdquo; (sing, vertex) and the connections are called &ldquo;edges&rdquo;. Graphs can have edges with, or without, direction, making traversal of the graphs different depending on the type of graph. Luckily there is a module, <a href="https://metacpan.org/pod/Graph"><code>Graph</code></a>, which is included in Perl which can represent these structures.</p>
+
+<p>That takes care of the requirement that the states need to be adjacent. What about searching for words? In the previous challenge, we could just iterate over all words in the dictionary and check them to see if they could be made using the state codes. Here, we would actually need to generate words from the states, given their adjacency, and then check to see if that is a valid word.</p>
+
+<p>Luckily, there is a data structure for that™: the <a href="https://en.wikipedia.org/wiki/Trie">Trie</a>, a search tree which allows for the lookup of words by prefix. It is ideal for applications such as predictive text, where words are suggested to a user based on the first few letters typed so far. We can use this to check if a word we are generating from the graph is in the dictionary. And of course, there is also a Perl module! <a href="use Tree::Trie"><code>Tree::Trie</code></a>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">get_paths</span> ( $graph, $trie, $vertex, $data, %seen ) {
+    $seen{$vertex} <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> ( keys %seen );
+
+    <span style="color:#66d9ef">my</span> $string_so_far <span style="color:#f92672">=</span> fc(
+        join( <span style="color:#e6db74">&#34;&#34;</span>,
+            map { $data<span style="color:#f92672">-&gt;</span>{$_}<span style="color:#f92672">-&gt;</span>{initials} }
+                ( sort { $seen{$a} <span style="color:#e6db74">&lt;=&gt;</span> $seen{$b} } keys %seen ) )
+    );
+
+    <span style="color:#75715e"># Filter out successive vertexes which have already been visited</span>
+    <span style="color:#75715e"># and which would not produce a word in the trie</span>
+    <span style="color:#66d9ef">my</span> @pot_successors <span style="color:#f92672">=</span> grep {
+        <span style="color:#f92672">!</span>( exists $seen{$_} )
+            <span style="color:#f92672">&amp;&amp;</span> $trie<span style="color:#f92672">-&gt;</span>lookup(
+            $string_so_far <span style="color:#f92672">.</span> fc( $data<span style="color:#f92672">-&gt;</span>{$_}<span style="color:#f92672">-&gt;</span>{initials} ) );
+    } sort { $a <span style="color:#f92672">cmp</span> $b } $graph<span style="color:#f92672">-&gt;</span>neighbors($vertex);
+
+    <span style="color:#75715e"># Base case: no more successors, done with this path</span>
+    <span style="color:#66d9ef">if</span> ( <span style="color:#f92672">!</span>@pot_successors ) {
+        <span style="color:#66d9ef">return</span> ( join( <span style="color:#e6db74">&#34;-&gt;&#34;</span>, sort { $seen{$a} <span style="color:#e6db74">&lt;=&gt;</span> $seen{$b} } keys %seen ),
+            $string_so_far );
+    }
+    <span style="color:#66d9ef">else</span> {
+        <span style="color:#75715e"># Process successors</span>
+        <span style="color:#66d9ef">return</span>
+            map { get_paths( $graph, $trie, $_, $data, %seen ) }
+            @pot_successors;
+    }
+
+}</code></pre></div>
+<p>I&rsquo;m not showing the code for initializing the graph or the trie here. You can check out the source code for that. The function above, however, lets us make several trips through the graph, given a starting point/vertex. We use a hash, <code>%seen</code> to keep track of the vertexes visited along the path so far. Each time a vertex is visited, it goes into the hash and gets a value based on the length of the path so far. I pay a penalty each time this function is called sorting that hash, but I&rsquo;m willing to do so.</p>
+
+<p>The next chunk of code gives us a list of potential next vertices to visit, both by eliminating already visited vertices, and by checking if visiting that vertex we are still building a valid word. If taking that path would be a &ldquo;dead end&rdquo;, then we simply won&rsquo;t visit that vertex.</p>
+
+<p>When there are no more potential successive nodes, we have reached the end of a path and build two strings: the path taken and the string generated. The former is just to make our output nicer and more informative. The latter is what we really want. These strings are returned as a two-element list which can be coerced into a hash by the first caller. Key collision should not be a problem since all the paths are different anyway.</p>
+
+<p>If there are more nodes, we make a recursive call, starting at one of the potential vertices to visit next.</p>
+
+<p><strong>Note:</strong> the fact that the <code>%seen</code> hash is not a hash ref makes this all relatively painless: each successive call to this function can make changes all it wants to the hash. Those changes will only live in that call&rsquo;s copy. So if we are iterating over other potential vertices way up in the first vertex, we can go deep down one path, and when we move on to another vertex, the next call to the function will get a copy of the <code>%seen</code> hash with only the first vertex in it. And so on for other successive calls.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#75715e"># Use a hash to save data on the longest word(s) found.</span>
+<span style="color:#66d9ef">my</span> %longest_word <span style="color:#f92672">=</span> ( paths <span style="color:#f92672">=&gt;</span> <span style="color:#f92672">[]</span>, words <span style="color:#f92672">=&gt;</span> <span style="color:#f92672">[]</span>, length <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span> );
+
+<span style="color:#75715e"># Iterate over all states in the graph.</span>
+<span style="color:#66d9ef">for</span> <span style="color:#66d9ef">my</span> $state ( sort $us_graph<span style="color:#f92672">-&gt;</span>vertices ) {
+
+    <span style="color:#75715e"># Finds all paths with strings that may be in the dictionary and</span>
+    <span style="color:#75715e"># save them into a hash.</span>
+    <span style="color:#66d9ef">my</span> %paths <span style="color:#f92672">=</span> get_paths( $us_graph, $eng_words, $state, <span style="color:#f92672">\</span>%us_adj_data );
+
+    <span style="color:#75715e"># Set the trie to do exact string search only</span>
+    $eng_words<span style="color:#f92672">-&gt;</span>deepsearch(<span style="color:#e6db74">&#34;exact&#34;</span>);
+
+    <span style="color:#75715e"># Iterate over all the path-&gt;word elements in the %paths hash</span>
+    <span style="color:#66d9ef">while</span> ( <span style="color:#66d9ef">my</span> ( $path, $search ) <span style="color:#f92672">=</span> each %paths ) {
+
+        <span style="color:#75715e"># Drop current path from the hash</span>
+        delete $paths{$path};
+
+        <span style="color:#75715e"># Do an exact string search for the word</span>
+        <span style="color:#66d9ef">my</span> $match <span style="color:#f92672">=</span> $eng_words<span style="color:#f92672">-&gt;</span>lookup($search);
+        <span style="color:#66d9ef">if</span> ( $match <span style="color:#f92672">&amp;&amp;</span> $match <span style="color:#f92672">eq</span> $search ) {
+
+            <span style="color:#75715e"># A word was found in the dictionary and its longer</span>
+            <span style="color:#75715e"># than the longest seen so far. Clear the longest_word</span>
+            <span style="color:#75715e"># hash and save the new data.</span>
+            <span style="color:#66d9ef">if</span> ( length($search) <span style="color:#f92672">&gt;</span> $longest_word{length} ) {
+                @longest_word{<span style="color:#e6db74">qw(paths words length)</span>}
+                    <span style="color:#f92672">=</span> ( [$path], [$match], length($search) );
+            }
+            <span style="color:#66d9ef">elsif</span> ( length($search) <span style="color:#f92672">==</span> $longest_word{length} ) {
+
+                <span style="color:#75715e"># A word of the same length as the longest seen</span>
+                <span style="color:#75715e"># was found. Push the data onto the list members</span>
+                <span style="color:#75715e"># of the longest_word hash.</span>
+                push $longest_word{paths}<span style="color:#f92672">-&gt;</span>@<span style="color:#960050;background-color:#1e0010">*</span>, $path;
+                push $longest_word{words}<span style="color:#f92672">-&gt;</span>@<span style="color:#960050;background-color:#1e0010">*</span>, $match;
+            }
+
+            <span style="color:#75715e"># last;</span>
+        }
+    }
+
+    <span style="color:#75715e"># Change search setting again so we can do prefix searches on the</span>
+    <span style="color:#75715e"># next iteration again.</span>
+    $eng_words<span style="color:#f92672">-&gt;</span>deepsearch(<span style="color:#e6db74">&#34;boolean&#34;</span>);
+}</code></pre></div>
+<p>Oh man this is a lot of stuff. The comments should help, however, and I will point out the important parts.</p>
+
+<p>The code above iterates over all the states in the graph. For each state, we use the <code>get_paths</code> function to get all of the paths and generated words. The line</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">$eng_words<span style="color:#f92672">-&gt;</span>deepsearch(<span style="color:#e6db74">&#34;exact&#34;</span>);</code></pre></div>
+<p>sets searching the trie to look for exact matches only. It seems that this function doesn&rsquo;t really work as intended, but I need more time to test it and maybe report a bug. Anyway, this means that we can check to see if the word we generated is really a valid word, and not just a valid <em>prefix</em> of some word in the dictionary. If we did find an exact match, we save it in a similar way to the original challenge 2, except that now we also save the path.</p>
+
+<p>Before moving on to the next state, we set the search back to &ldquo;boolean&rdquo;, which simply returns &ldquo;true&rdquo; if the prefix is in the trie.</p>
+
+<p><strong>Note 2:</strong> In Challenge 2, I allowed words with apostrophes to be matched, but for some reason this resulted in some flaky output when using the trie. So for the additional challenge, I drop such words from the dictionary.</p>
+
+<p>I am positive I over-thought and over-engineered this one, but it was fun to do it&hellip;once I got over the frustration of trying to use <a href="https://metacpan.org/pod/Graph::Traversal"><code>Graph::Traversal</code></a>. It didn&rsquo;t do what I wanted, and <code>get_paths</code> above was my solution. That ended up being better anyway as I had control over which paths not to take.</p>
+
+<p>With the wordlist dictionary on Arch Linux, this script gives the following output:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">Longest word(s) constructed using initials of US states: 
+CO-&gt;OK-&gt;NM-&gt;AZ-&gt;NV = conman
+with a length of 6 alphabetical characters</pre></div>
+<p>and using the alphabetic-only list from <a href="https://github.com/dwyl/english-words">https://github.com/dwyl/english-words</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">Longest word(s) constructed using initials of US states: 
+CA-&gt;AZ-&gt;NV-&gt;UT-&gt;CO-&gt;KS = canuck
+MO-&gt;AR-&gt;LA-&gt;MS-&gt;AL-&gt;GA = malmag
+with a length of 6 alphabetical characters</pre></div>
+<p><strong>Cons:</strong> Besides being an overcomplicated solution, building the trie can take a while if it is very large. I am sure that a large enough graph would also be a problem.</p>
+
+<p>See the full solution, <a href="https://github.com/manwar/perlweeklychallenge-club/tree/master/challenge-014/yozen-hernandez/perl5/ch-2a.pl">here</a>.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
