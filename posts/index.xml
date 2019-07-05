@@ -6,10 +6,32 @@
     <description>Recent content in Posts on Yozen Hernandez</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 30 Jun 2019 12:01:08 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 04 Jul 2019 23:44:35 -0400</lastBuildDate>
     
 	<atom:link href="https://yzhernand.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Perl Weekly Challenge 15, Part 2: Encrypting/Decrypting With the Vigenère Cipher</title>
+      <link>https://yzhernand.github.io/posts/perl-weekly-challenge-15-part2/</link>
+      <pubDate>Thu, 04 Jul 2019 23:44:35 -0400</pubDate>
+      
+      <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-15-part2/</guid>
+      <description>Welcome to the second part of my posts on this week&amp;rsquo;s Perl Weekly Challenge. You can find the first part of this post on either dev.to or my personal blog.
+Challenge 2  Write a script to implement Vigenère cipher. The script should be able encode and decode. Checkout wiki page for more information.
+ This seemed like a cool challenge to tackle. Knowing next to nothing about encryption, I was worried that this would take me all week.</description>
+    </item>
+    
+    <item>
+      <title>Perl Weekly Challenge 15, Part 1: Finding Strong and Weak Primes with Perl</title>
+      <link>https://yzhernand.github.io/posts/perl-weekly-challenge-15/</link>
+      <pubDate>Mon, 01 Jul 2019 14:45:21 -0400</pubDate>
+      
+      <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-15/</guid>
+      <description>This week&amp;rsquo;s Perl Weekly Challenge touched on prime number sequences again, and some old-school cryptography (which was pretty exciting). This post is divided into two parts, one for each challenge. Find part 2 on dev.to or my blog on Github Pages.
+Challenge 1  Write a script to generate first 10 strong and weak prime numbers. For example, the *n*th prime number is represented by p(n).
+p(1) = 2 p(2) = 3 p(3) = 5 p(4) = 7 p(5) = 11</description>
+    </item>
     
     <item>
       <title>Perl Weekly Challenge 14: van Eck’s sequence / Adventures in overthinking- making words from US state initials</title>
