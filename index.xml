@@ -6,13 +6,23 @@
     <description>Recent content on Yozen Hernandez</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Jul 2019 13:25:46 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 12 Jul 2019 13:25:49 -0400</lastBuildDate>
     
 	<atom:link href="https://yzhernand.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Perl Weekly Challenge 16: Torturing your party guests with the Pythagoreas pie puzzle</title>
+      <title>Perl Weekly Challenge 16: Decoding a Bitcoin Address in Perl</title>
+      <link>https://yzhernand.github.io/posts/perl-weekly-challenge-16-2/</link>
+      <pubDate>Fri, 12 Jul 2019 13:25:49 -0400</pubDate>
+      
+      <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-16-2/</guid>
+      <description>The second challenge of this week&amp;rsquo;s Perl Weekly Challenge deals with Bitcoin, that ubiquitous digital currency we all have heard of, few totally understand, and some wish we had never invested in when we did.
+ Write a script to validate a given bitcoin address. Most Bitcoin addresses are 34 characters. They consist of random digits and uppercase and lowercase letters, with the exception that the uppercase letter “O”, uppercase letter “I”, lowercase letter “l”, and the number “0” are never used to prevent visual ambiguity.</description>
+    </item>
+    
+    <item>
+      <title>Perl Weekly Challenge 16: Torturing Your Party Guests With The Pythagoreas Pie Puzzle</title>
       <link>https://yzhernand.github.io/posts/perl-weekly-challenge-16-1/</link>
       <pubDate>Fri, 12 Jul 2019 13:25:46 -0400</pubDate>
       

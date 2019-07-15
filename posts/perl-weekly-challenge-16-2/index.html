@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Perl Weekly Challenge 16: Decoding a Bitcoin Address in Perl // Yozen Hernandez</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Yozen Hernandez" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://yzhernand.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Perl Weekly Challenge 16: Decoding a Bitcoin Address in Perl"/>
+<meta name="twitter:description" content="The second challenge of this week&rsquo;s Perl Weekly Challenge deals with Bitcoin, that ubiquitous digital currency we all have heard of, few totally understand, and some wish we had never invested in when we did.
+ Write a script to validate a given bitcoin address. Most Bitcoin addresses are 34 characters. They consist of random digits and uppercase and lowercase letters, with the exception that the uppercase letter “O”, uppercase letter “I”, lowercase letter “l”, and the number “0” are never used to prevent visual ambiguity."/>
+
+    <meta property="og:title" content="Perl Weekly Challenge 16: Decoding a Bitcoin Address in Perl" />
+<meta property="og:description" content="The second challenge of this week&rsquo;s Perl Weekly Challenge deals with Bitcoin, that ubiquitous digital currency we all have heard of, few totally understand, and some wish we had never invested in when we did.
+ Write a script to validate a given bitcoin address. Most Bitcoin addresses are 34 characters. They consist of random digits and uppercase and lowercase letters, with the exception that the uppercase letter “O”, uppercase letter “I”, lowercase letter “l”, and the number “0” are never used to prevent visual ambiguity." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yzhernand.github.io/posts/perl-weekly-challenge-16-2/" />
+<meta property="article:published_time" content="2019-07-12T13:25:49-04:00"/>
+<meta property="article:modified_time" content="2019-07-12T13:25:49-04:00"/>
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://yzhernand.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Yozen Hernandez" /></a>
+      <h1>Yozen Hernandez</h1>
+      <p>Bioinformatics guy who programs in Perl, C, and R. Occasionally writes about things.</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/yzhernand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/yzhernand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Perl Weekly Challenge 16: Decoding a Bitcoin Address in Perl</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jul 12, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          6 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<p>The second challenge of this week&rsquo;s <a href="https://perlweeklychallenge.org/blog/perl-weekly-challenge-016/">Perl Weekly Challenge</a> deals with Bitcoin, that ubiquitous digital currency we all have heard of, few totally understand, and some wish we had never invested in when we did.</p>
+
+<blockquote>
+<p>Write a script to validate a given bitcoin address. Most Bitcoin addresses are 34 characters. They consist of random digits and uppercase and lowercase letters, with the exception that the uppercase letter “O”, uppercase letter “I”, lowercase letter “l”, and the number “0” are never used to prevent visual ambiguity. A bitcoin address encodes 25 bytes. The last four bytes are a checksum check. They are the first four bytes of a double SHA-256 digest of the previous 21 bytes. For more information, please refer <a href="https://en.bitcoin.it/wiki/Address">wiki</a> page.</p>
+</blockquote>
+
+<p>This sort of challenge was new to me. I never dealt with SHA hashes, decoding, or comparing checksums (at least not within Perl). I have done some programming involving byte-wise or bit-wise computation, but definitely not in Perl. It took a couple of hours reading things over in the wiki before I got a handle on what I needed to do.</p>
+
+<p>Each bitcoin address is a number, though a rather large one, encoded in base-58 which just means there are 58 characters which are used to represent values (as opposed to just 10 in base 10, 0-9). The characters are, in increasing value:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz</pre></div>
+<p>As stated in the challenge, some characters are omitted since they can be visually confused for each other in some cases: capital letter &ldquo;O&rdquo;, number &ldquo;0&rdquo;, capital letter &ldquo;I&rdquo;, and lowercase letter &ldquo;l&rdquo;.</p>
+
+<p>Now, having an idea of what characters represent what value, here are the steps, roughly, on decoding and validating a bitcoin address:</p>
+
+<ol>
+<li>Iterate over each symbol in the input address string, convert to a numeric representation multiplied by the &ldquo;place&rdquo; of the symbol. Since addresses can be shorter or longer, iterate from right to left.</li>
+<li>Add the value to a running total.</li>
+<li>Post iteration, convert the numeric total to byte-representation.</li>
+<li>If the address is shorter than the longest possible valid bitcoin address, left-pad with &lsquo;0&rsquo;s.</li>
+</ol>
+
+<p>Seems simple enough, right? Well I haven&rsquo;t read anyone else&rsquo;s blog posts yet, but I ran into a number of issues, which I will detail below.</p>
+
+<p>As mentioned in point 1, we need to iterate over the string in the reverse sense, at least for clarity, since bitcoin addresses are at most 34 characters long, but can be shorter. Starting from the right lets us start a counter at 0 which increases with each leftward move along the string. That counter is used to multiply the value of the current character with the correct power of the base. If that&rsquo;s confusing, this is how you would do the same kind of decoding with base-10 numbers which seems so natural you probably don&rsquo;t realize you are doing it (unless you are a math/CS major I suppose): \(1295 = 1\times10^3 + 2\times10^2 + 9\times10^1 + 5\times10^0\).</p>
+
+<p>Now to keep track of the running total of our bitcoin address. In my decoding function:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">    <span style="color:#66d9ef">my</span> $val;
+    <span style="color:#66d9ef">my</span> $base <span style="color:#f92672">=</span> <span style="color:#ae81ff">58</span>;
+    <span style="color:#66d9ef">my</span> @btc_arr <span style="color:#f92672">=</span> reverse split( <span style="color:#e6db74">//</span>, $btc_addr );
+
+    <span style="color:#66d9ef">while</span> ( <span style="color:#66d9ef">my</span> ( $i, $v ) <span style="color:#f92672">=</span> each @btc_arr ) {
+        croak(<span style="color:#e6db74">&#34;Invalid bitcoin address&#34;</span>) <span style="color:#66d9ef">unless</span> (exists $b58{$v});
+        $val <span style="color:#f92672">+=</span> $b58{$v} <span style="color:#f92672">*</span> ($base<span style="color:#f92672">**</span>$i);
+    }</code></pre></div>
+<p>So that doesn&rsquo;t work. Wait, what?</p>
+
+<p>I test the output of my functions as I write them using <a href="https://metacpan.org/pod/Test::More"><code>Test::More</code></a>. Using an online <a href="http://lenschulwitz.com/base58">bitcoin address decoder</a> and the <a href="https://perldoc.pl/functions/pack">pack/unpack</a> functions (which I&rsquo;ve only learned about thanks to these challenges), I compare what I get to the tool&rsquo;s output:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">is(unpack(&#34;H*&#34;, b58_decode(&#39;1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2&#39;)), lc&#39;0077BFF20C60E522DFAA3350C39B030A5D004E839AF415766B&#39;, &#34;b58 decode works&#34;);</pre></div>
+<p><code>unpack(&quot;H*&quot;, $blah)</code> converts the whatever bytes are in <code>$blah</code> according to the template <code>&quot;H*&quot;</code>, which means turn into a hex string (in <a href="https://en.wikipedia.org/wiki/Endianness">big-endian</a> order). The return value of the function is converted into hex and then compared to the hex string I know to be the decoded hex value. I use lowercase to convert it since unpack returns a lowercase string.</p>
+
+<p>The numeric value is turned into bytes and returned in the function more or less like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">    <span style="color:#66d9ef">my</span> $decoded;
+
+    <span style="color:#75715e"># Bytes are 8-bit == 256 values</span>
+    <span style="color:#66d9ef">while</span> ($val <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">256</span>) {
+        <span style="color:#75715e"># Get next lowest byte</span>
+        <span style="color:#66d9ef">my</span> $mod <span style="color:#f92672">=</span> $val % 256;
+
+        <span style="color:#75715e"># Prefix chr value of $mod to byte string</span>
+        $decoded <span style="color:#f92672">=</span> chr($mod) <span style="color:#f92672">.</span> $decoded;
+        $val <span style="color:#f92672">=</span> int($val <span style="color:#f92672">/</span> <span style="color:#ae81ff">256</span>);
+    }
+
+    $decoded <span style="color:#f92672">=</span> chr($val) <span style="color:#f92672">.</span> $decoded;
+
+    <span style="color:#75715e">#0-padding</span>
+    $decoded <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span> x (<span style="color:#ae81ff">25</span><span style="color:#f92672">-</span>length($decoded))) <span style="color:#f92672">.</span> $decoded;
+    <span style="color:#66d9ef">return</span> $decoded;</code></pre></div>
+<p>You might notice there are actually two problems here. But the first one is that Perl does not support &ldquo;big&rdquo; numbers out of the box. And bitcoin address values are indeed <em>very</em> big numbers. Ok, let&rsquo;s use <a href="https://metacpan.org/pod/Math::BigInt"><code>Math::BigInt</code></a>. Problem solved, right?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">b58_decode</span> ($btc_addr) {
+    <span style="color:#66d9ef">my</span> $val <span style="color:#f92672">=</span> Math::BigInt<span style="color:#f92672">-&gt;</span><span style="color:#66d9ef">new</span>();
+    <span style="color:#66d9ef">my</span> $base <span style="color:#f92672">=</span> Math::BigInt<span style="color:#f92672">-&gt;</span><span style="color:#66d9ef">new</span>(<span style="color:#ae81ff">58</span>);
+    <span style="color:#66d9ef">my</span> @btc_arr <span style="color:#f92672">=</span> reverse split( <span style="color:#e6db74">//</span>, $btc_addr );
+
+    <span style="color:#66d9ef">while</span> ( <span style="color:#66d9ef">my</span> ( $i, $v ) <span style="color:#f92672">=</span> each @btc_arr ) {
+        croak(<span style="color:#e6db74">&#34;Invalid bitcoin address&#34;</span>) <span style="color:#66d9ef">unless</span> (exists $b58{$v});
+        $val <span style="color:#f92672">=</span> $base<span style="color:#f92672">-&gt;</span>copy()<span style="color:#f92672">-&gt;</span>bpow($i)<span style="color:#f92672">-&gt;</span>bmuladd($b58{$v}, $val);
+    }
+
+    <span style="color:#75715e"># Decode value to bytes</span>
+    <span style="color:#66d9ef">my</span> $decoded <span style="color:#f92672">=</span> $val<span style="color:#f92672">-&gt;</span>to_bytes();
+
+    <span style="color:#75715e"># 0-padding</span>
+    $decoded <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span> x (<span style="color:#ae81ff">25</span><span style="color:#f92672">-</span>length($decoded))) <span style="color:#f92672">.</span> $decoded;
+    <span style="color:#66d9ef">return</span> $decoded;
+}</code></pre></div>
+<p>Thanks to the <code>to_byte</code> method in Math::BigInt, I can quickly convert the value to the byte representation. But this still didn&rsquo;t work! Yeah, stupid mistake&hellip;I wanted the representation in bytes, and for that you have to use the <code>chr</code> function, not just a plain <code>0</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">    $decoded <span style="color:#f92672">=</span> (chr(<span style="color:#ae81ff">0</span>) x (<span style="color:#ae81ff">25</span><span style="color:#f92672">-</span>length($decoded))) <span style="color:#f92672">.</span> $decoded;</code></pre></div>
+<p>My tests finally pass! Now validating doesn&rsquo;t take much at all:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">btc_valid</span> ($btc_addr) {
+    <span style="color:#66d9ef">my</span> $decoded <span style="color:#f92672">=</span> b58_decode($btc_addr);
+
+  <span style="color:#75715e"># The last four bytes are a checksum check. They are the first four bytes of</span>
+  <span style="color:#75715e"># a double SHA-256 digest of the previous 21 bytes.</span>
+    <span style="color:#66d9ef">my</span> $checksum <span style="color:#f92672">=</span> substr $decoded, <span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>;
+    <span style="color:#66d9ef">my</span> $data     <span style="color:#f92672">=</span> substr $decoded, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">21</span>;
+
+    <span style="color:#66d9ef">return</span> ( $checksum <span style="color:#f92672">eq</span> substr(sha256( sha256($data) ), <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">4</span>) ) ? substr($decoded, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>) : undef;
+}</code></pre></div>
+<p>The core module <a href="https://metacpan.org/pod/Digest::SHA"><code>Digest::SHA</code></a> provides the hashing function, <code>sha256</code>. We use <code>substr</code> on the string returned by my decoding function to extract the bytes we want (this turns out to be faster than split/slice/join&rsquo;ing), and compare the last 4 bytes to the double hash of the first 21 bytes.</p>
+
+<p>The return value of the function upon success came from me looking at <a href="https://bitcointalk.org/index.php?topic=1026.0">this thread</a> (suggested by the bitcoin wiki) and the solutions users there had in other languages. Personally, I think that the Perl solution using <a href="https://metacpan.org/pod/Math::BigInt"><code>Math::BigInt</code></a> looks a bit more compact than the solutions there, but I&rsquo;m ready to be blown away by the answers from other challenge participants.</p>
+
+<p>This was certainly a challenging problem to solve, but it forced me to use some parts of my brain and Perl I hadn&rsquo;t had to use before, and that might come in handy.</p>
+
+<p>See the full solution, <a href="https://github.com/manwar/perlweeklychallenge-club/tree/master/challenge-016/yozen-hernandez/perl5/ch-2.pl">here</a>.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
