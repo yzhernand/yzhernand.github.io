@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Perl Weekly Challenge 16: Torturing your party guests with the Pythagoreas pie puzzle // Yozen Hernandez</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Yozen Hernandez" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://yzhernand.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Perl Weekly Challenge 16: Torturing your party guests with the Pythagoreas pie puzzle"/>
+<meta name="twitter:description" content="This week&rsquo;s Perl Weekly Challenge includes a math puzzle known as the Pythagoreas Pie Puzzle. The problem, as stated by challenge proponent Jo Christian Oterhals:
+ At a party a pie is to be shared by 100 guest. The first guest gets 1% of the pie, the second guest gets 2% of the remaining pie, the third gets 3% of the remaining pie, the fourth gets 4% and so on."/>
+
+    <meta property="og:title" content="Perl Weekly Challenge 16: Torturing your party guests with the Pythagoreas pie puzzle" />
+<meta property="og:description" content="This week&rsquo;s Perl Weekly Challenge includes a math puzzle known as the Pythagoreas Pie Puzzle. The problem, as stated by challenge proponent Jo Christian Oterhals:
+ At a party a pie is to be shared by 100 guest. The first guest gets 1% of the pie, the second guest gets 2% of the remaining pie, the third gets 3% of the remaining pie, the fourth gets 4% and so on." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yzhernand.github.io/posts/perl-weekly-challenge-16-1/" />
+<meta property="article:published_time" content="2019-07-12T13:25:46-04:00"/>
+<meta property="article:modified_time" content="2019-07-12T13:25:46-04:00"/>
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://yzhernand.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Yozen Hernandez" /></a>
+      <h1>Yozen Hernandez</h1>
+      <p>Bioinformatics guy who programs in Perl, C, and R. Occasionally writes about things.</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/yzhernand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/yzhernand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Perl Weekly Challenge 16: Torturing your party guests with the Pythagoreas pie puzzle</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jul 12, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          5 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<p>This week&rsquo;s <a href="https://perlweeklychallenge.org/blog/perl-weekly-challenge-016/">Perl Weekly Challenge</a> includes a math puzzle known as the <em>Pythagoreas Pie Puzzle</em>. The problem, as stated by challenge proponent Jo Christian Oterhals:</p>
+
+<blockquote>
+<p>At a party a pie is to be shared by 100 guest. The first guest gets 1% of the pie, the second guest gets 2% of the remaining pie, the third gets 3% of the remaining pie, the fourth gets 4% and so on.</p>
+
+<p>Write a script that figures out which guest gets the largest piece of pie.</p>
+</blockquote>
+
+<p>Let&rsquo;s take a look at what happens for the first few guests when time they come to take a slice of the pie. The table below shows the calculation made for each guest:</p>
+
+<table>
+<thead>
+<tr>
+<th align="right">Guest (index)</th>
+<th align="right">Portion</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">1</td>
+<td align="right">(0.01*100)</td>
+</tr>
+
+<tr>
+<td align="right">2</td>
+<td align="right">(0.02*99)</td>
+</tr>
+
+<tr>
+<td align="right">3</td>
+<td align="right">(0.03*97.02)</td>
+</tr>
+
+<tr>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+</tr>
+</tbody>
+</table>
+
+<p>There&rsquo;s clearly a pattern there:</p>
+
+<ul>
+<li>Each guest is getting a fixed percentage of the <em>remaining</em> pie</li>
+<li>The fixed percentage is dependent on the guest&rsquo;s &ldquo;index&rdquo;</li>
+<li>The calculation of that depends on the index of the guest and the remaining pie when they came along.</li>
+</ul>
+
+<p>So each guest has to do something like:</p>
+
+<p>$$(i/100)R$$</p>
+
+<p>where \(i\) is the index of the guest and \(R\) is how much pie is remaining, to calculate how much they get. Given the table and the points noted above, it becomes clear that the way we get \(R\) is just by going back to the calculation made by the guest before, all the way back to the first one:</p>
+
+<p>$$\begin{align}
+100 \times \frac{99}{100} &amp; \quad \text{First guest} \newline
+100 \times \frac{99}{100} \times \frac{98}{100} &amp; \quad \text{Second guest} \newline
+100 \times \frac{99}{100} \times \frac{98}{100} \times \frac{97}{100} &amp; \quad \text{Third guest} \newline
+\vdots \newline
+\end{align}$$</p>
+
+<p>Why \(\frac{99}{100}\) and not \(\frac{1}{100}\), and so on, in the equations above? Because the next guest needs to know how much of the pie is <strong>left</strong>, not how much the guest before them took. The first guest left behind (<sup>99</sup>&frasl;<sub>100</sub>) of 100% of the pie. The next guest left behind <sup>98</sup>&frasl;<sub>100</sub> of that. And so on.</p>
+
+<p>This problem can be considered as a <a href="https://en.wikipedia.org/wiki/Multiplication#Capital_Pi_notation">product of a sequence</a>, with a general formula of</p>
+
+<p>$$\prod_{i=1}^{99} {\frac{(100-i)}{100}}$$</p>
+
+<p>We can start at \(i=1\) and not \(i=0\) because that is just a multiplication by 1. We also don&rsquo;t go to 100 since after the last guest nothing is left (\(\frac{100-100}{100} = 0\)). If the upper limit were 3, we would get the amount of pie remaining after 3 guests</p>
+
+<p>$$\begin{align}
+\prod_{i=1}^{3} {\frac{(100-i)}{100}} &amp;= \frac{99}{100} \times \frac{98}{100} \times \frac{97}{100}\newline
+&amp;= 0.941094\newline
+\end{align}$$</p>
+
+<p>The first iteration of my code used this observation, keeping a list of the amount of pie left after each guest. The next value, \(i\), in the list is calculated simply by multiplying the last element in the array by \(\frac{100-i}{100}\) since that value is already the product of all prior multiplications up to that point. Then I would take the difference between the sizes of the remaining pie after the current guest and the guest before:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">list_pie_remaining</span> {
+
+    <span style="color:#75715e"># Other guests get a percent of the remaining 99/100:</span>
+    <span style="color:#75715e"># 99/100*(2/100) for the second, leaving (99/100)*(98/100)</span>
+    <span style="color:#75715e"># for the third guest, and so on...</span>
+    <span style="color:#75715e"># So lets just generate a list with the amount of pie left</span>
+    <span style="color:#75715e"># for each guest</span>
+    <span style="color:#66d9ef">my</span> @remaining_pie <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>);
+
+    <span style="color:#75715e"># my @pie_shares = (1/100);</span>
+    <span style="color:#66d9ef">my</span> %largest_piece <span style="color:#f92672">=</span> ( guest <span style="color:#f92672">=&gt;</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, size <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span> );
+
+    <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">my</span> $i ( <span style="color:#ae81ff">1</span> <span style="color:#f92672">..</span> <span style="color:#ae81ff">99</span> ) {
+        push @remaining_pie, ( ( <span style="color:#ae81ff">100</span> <span style="color:#f92672">-</span> $i ) <span style="color:#f92672">/</span> <span style="color:#ae81ff">100</span> ) <span style="color:#f92672">*</span> $remaining_pie[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+
+        ( ( $remaining_pie[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">-</span> $remaining_pie[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] ) <span style="color:#f92672">&gt;</span> $largest_piece{size} )
+            ? @largest_piece{ <span style="color:#e6db74">&#34;guest&#34;</span>, <span style="color:#e6db74">&#34;size&#34;</span> }
+            <span style="color:#f92672">=</span> ( $i, $remaining_pie[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">-</span> $remaining_pie[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] )
+            : <span style="color:#66d9ef">next</span>;
+
+        <span style="color:#75715e"># push @pie_pieces, $remaining_pie[-2]-$remaining_pie[-1];</span>
+    }
+
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">\</span>%largest_piece;
+}</code></pre></div>
+<p>I kept a hash with the largest piece seen so far, which is returned as a hashref.</p>
+
+<p>It turns out, however, that the shares each guest gets are actually getting larger right up until a certain point, as shown in the graph below:</p>
+
+<p><img src="/images/pwc16-1.png" width="60%"></p>
+
+<p>Which means that we only really need to keep track of values for the pie share right up until the share sizes start to decrease, halting execution much sooner than in my first try at this. <strong>Late spoiler alert</strong>: it helps if you already knew the answer ahead of time, but the largest slice is taken by the 10th guest, so we save needless calculations over the next 90 guests!</p>
+
+<p>Another change we could make is that we don&rsquo;t need to maintin a list of all prior values. You could just keep track of the last piece and the pie remaining:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">track_last_piece</span> {
+    <span style="color:#66d9ef">my</span> $remaining_pie <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+    <span style="color:#66d9ef">my</span> $last_piece    <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+
+    <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">my</span> $i ( <span style="color:#ae81ff">1</span> <span style="color:#f92672">..</span> <span style="color:#ae81ff">100</span> ) {
+        <span style="color:#66d9ef">my</span> $new_piece
+            <span style="color:#f92672">=</span> $remaining_pie <span style="color:#f92672">-</span> ( ( <span style="color:#ae81ff">100</span> <span style="color:#f92672">-</span> $i ) <span style="color:#f92672">/</span> <span style="color:#ae81ff">100</span> ) <span style="color:#f92672">*</span> $remaining_pie;
+
+        <span style="color:#66d9ef">if</span> ( $new_piece <span style="color:#f92672">&lt;</span> $last_piece ) {
+            <span style="color:#66d9ef">return</span> { guest <span style="color:#f92672">=&gt;</span> ( $i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ), size <span style="color:#f92672">=&gt;</span> $last_piece };
+        }
+
+        $last_piece <span style="color:#f92672">=</span> $new_piece;
+        $remaining_pie <span style="color:#f92672">-=</span> $new_piece;
+    }
+
+    <span style="color:#66d9ef">return</span> undef;
+}</code></pre></div>
+<p>Obviously, I won&rsquo;t claim that this is the best solution, but the best I came up with, in the time I had. I took a page out of <a href="http://tilde.town/~wlsn/pwc015.html">Steven Wilson&rsquo;s</a> book and used <a href="https://metacpan.org/pod/Benchmark::Forking">Benchmark::Forking</a> as he details in his awesome blog post on last week&rsquo;s challenge. Below are the results I got when comparing the two methods:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">                        Rate list_pie_remaining   track_last_share
+ list_pie_remaining  43203/s                 --               -88%
+ track_last_piece   368816/s               754%                 --</pre></div>
+<p>Obviously a dramatic improvement, which almost certainly leaves room for improvement.</p>
+
+<p>See the full solution, <a href="https://github.com/manwar/perlweeklychallenge-club/tree/master/challenge-017/yozen-hernandez/perl5/ch-1.pl">here</a>.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
