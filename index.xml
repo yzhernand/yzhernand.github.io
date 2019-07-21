@@ -6,10 +6,23 @@
     <description>Recent content on Yozen Hernandez</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Jul 2019 13:25:49 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 19 Jul 2019 07:07:57 -0400</lastBuildDate>
     
 	<atom:link href="https://yzhernand.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Perl Weekly Challenge 17: Writing Our Own URL Parser in Perl (But Should We?)</title>
+      <link>https://yzhernand.github.io/posts/perl-weekly-challenge-17-2/</link>
+      <pubDate>Fri, 19 Jul 2019 07:07:57 -0400</pubDate>
+      
+      <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-17-2/</guid>
+      <description>The second challenge in this week&amp;rsquo;s Perl Weekly Challenge asks us to parse a URL:
+ Create a script to parse URL and print the components of URL. According to Wiki page, the URL syntax is as below:
+scheme:[//[userinfo@]host[:port]]path[?query][#fragment]
+For example: jdbc:mysql://user:password@localhost:3306/pwc?profile=true#h1
+ scheme: jdbc:mysql userinfo: user:password host: localhost port: 3306 path: /pwc query: profile=true fragment: h1 Sounds good. Let&amp;rsquo;s try to parse this out. Maybe we&amp;rsquo;ll use a few regex&amp;rsquo;s, and that&amp;rsquo;ll be it.</description>
+    </item>
     
     <item>
       <title>Perl Weekly Challenge 16: Decoding a Bitcoin Address in Perl</title>
