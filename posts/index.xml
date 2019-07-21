@@ -25,6 +25,17 @@ For example: jdbc:mysql://user:password@localhost:3306/pwc?profile=true#h1
     </item>
     
     <item>
+      <title>Perl Weekly Challenge 17: The Ackermann function</title>
+      <link>https://yzhernand.github.io/posts/perl-weekly-challenge-17-1/</link>
+      <pubDate>Fri, 19 Jul 2019 07:07:53 -0400</pubDate>
+      
+      <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-17-1/</guid>
+      <description>The Perl Weekly Challenge is back, and our first challenge was to implement a function known as the Ackermann function:
+ Create a script to demonstrate Ackermann function. The Ackermann function is defined as below, m and n are positive number:
+A(m, n) = n + 1 if m = 0 A(m, n) = A(m - 1, 1) if m &amp;gt; 0 and n = 0 A(m, n) = A(m - 1, A(m, n - 1)) if m &amp;gt; 0 and n &amp;gt; 0</description>
+    </item>
+    
+    <item>
       <title>Perl Weekly Challenge 16: Decoding a Bitcoin Address in Perl</title>
       <link>https://yzhernand.github.io/posts/perl-weekly-challenge-16-2/</link>
       <pubDate>Fri, 12 Jul 2019 13:25:49 -0400</pubDate>
