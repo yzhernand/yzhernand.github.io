@@ -3,7 +3,7 @@
   <head>
     <title>Perl Weekly Challenge 16: Torturing Your Party Guests With The Pythagoreas Pie Puzzle // Yozen Hernandez</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.60.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Yozen Hernandez" />
     <meta name="description" content="" />
@@ -20,8 +20,8 @@
  At a party a pie is to be shared by 100 guest. The first guest gets 1% of the pie, the second guest gets 2% of the remaining pie, the third gets 3% of the remaining pie, the fourth gets 4% and so on." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yzhernand.github.io/posts/perl-weekly-challenge-16-1/" />
-<meta property="article:published_time" content="2019-07-12T13:25:46-04:00"/>
-<meta property="article:modified_time" content="2019-07-12T13:25:46-04:00"/>
+<meta property="article:published_time" content="2019-07-12T13:25:46-04:00" />
+<meta property="article:modified_time" content="2019-07-12T13:25:46-04:00" />
 
 
   </head>
@@ -155,7 +155,7 @@
     <span style="color:#66d9ef">my</span> @remaining_pie <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>);
 
     <span style="color:#75715e"># my @pie_shares = (1/100);</span>
-    <span style="color:#66d9ef">my</span> %largest_piece <span style="color:#f92672">=</span> ( guest <span style="color:#f92672">=&gt;</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, size <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span> );
+    <span style="color:#66d9ef">my</span> %largest_piece <span style="color:#f92672">=</span> ( guest <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, size <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> );
 
     <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">my</span> $i ( <span style="color:#ae81ff">1</span> <span style="color:#f92672">..</span> <span style="color:#ae81ff">99</span> ) {
         push @remaining_pie, ( ( <span style="color:#ae81ff">100</span> <span style="color:#f92672">-</span> $i ) <span style="color:#f92672">/</span> <span style="color:#ae81ff">100</span> ) <span style="color:#f92672">*</span> $remaining_pie[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
@@ -188,7 +188,7 @@
             <span style="color:#f92672">=</span> $remaining_pie <span style="color:#f92672">-</span> ( ( <span style="color:#ae81ff">100</span> <span style="color:#f92672">-</span> $i ) <span style="color:#f92672">/</span> <span style="color:#ae81ff">100</span> ) <span style="color:#f92672">*</span> $remaining_pie;
 
         <span style="color:#66d9ef">if</span> ( $new_piece <span style="color:#f92672">&lt;</span> $last_piece ) {
-            <span style="color:#66d9ef">return</span> { guest <span style="color:#f92672">=&gt;</span> ( $i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ), size <span style="color:#f92672">=&gt;</span> $last_piece };
+            <span style="color:#66d9ef">return</span> { guest <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> ( $i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ), size <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> $last_piece };
         }
 
         $last_piece <span style="color:#f92672">=</span> $new_piece;
@@ -198,9 +198,9 @@
     <span style="color:#66d9ef">return</span> undef;
 }</code></pre></div>
 <p>Obviously, I won&rsquo;t claim that this is the best solution, but the best I came up with, in the time I had. I took a page out of <a href="http://tilde.town/~wlsn/pwc015.html">Steven Wilson&rsquo;s</a> book and used <a href="https://metacpan.org/pod/Benchmark::Forking">Benchmark::Forking</a> as he details in his awesome blog post on last week&rsquo;s challenge. Below are the results I got when comparing the two methods:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">                        Rate list_pie_remaining   track_last_share
+<pre><code>                        Rate list_pie_remaining   track_last_share
  list_pie_remaining  43203/s                 --               -88%
- track_last_piece   368816/s               754%                 --</pre></div>
+ track_last_piece   368816/s               754%                 --</code></pre>
 <p>Obviously a dramatic improvement, which almost certainly leaves room for improvement.</p>
 
 <p>See the full solution, <a href="https://github.com/manwar/perlweeklychallenge-club/tree/master/challenge-016/yozen-hernandez/perl5/ch-1.pl">here</a>.</p>

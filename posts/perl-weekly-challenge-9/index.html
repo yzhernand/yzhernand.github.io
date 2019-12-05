@@ -3,7 +3,7 @@
   <head>
     <title>Perl Weekly Challenge 9 // Yozen Hernandez</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.60.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Yozen Hernandez" />
     <meta name="description" content="" />
@@ -22,8 +22,8 @@ I decided to blog a bit so that I can write about the process that goes into sol
 So this post will deal with the 9th challenge so far. Check out this challenge, as well as the Perl Weekly Challenge page, here." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yzhernand.github.io/posts/perl-weekly-challenge-9/" />
-<meta property="article:published_time" content="2019-05-21T09:25:05-04:00"/>
-<meta property="article:modified_time" content="2019-05-21T09:25:05-04:00"/>
+<meta property="article:published_time" content="2019-05-21T09:25:05-04:00" />
+<meta property="article:modified_time" content="2019-05-21T09:25:05-04:00" />
 
 
   </head>
@@ -94,7 +94,7 @@ So this post will deal with the 9th challenge so far. Check out this challenge, 
     <span style="color:#75715e"># Use positive lookahead to get rid of duplicate digits</span>
     ( <span style="color:#66d9ef">my</span> $dedup <span style="color:#f92672">=</span> $root<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> ) <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/(.)(?=.*?\1)//g</span>;
     <span style="color:#66d9ef">last</span> <span style="color:#66d9ef">if</span> ( length($dedup) <span style="color:#f92672">&gt;=</span> $n );
-    $root<span style="color:#f92672">++</span>;
+    $root<span style="color:#f92672">+</span><span style="color:#f92672">+</span>;
 }</code></pre></div>
 <p>I used <a href="https://perldoc.pl/perlretut#Looking-ahead-and-looking-behind">Positive Lookahead</a> to remove characters if they had already occurred in the string. I could have done something else, like splitting the string and using the characters as keys in a hash, but I figured this could be accomplished using regular expressions. Being Truly Lazy™, I searched online before I brushed up on my lookahead knowledge and confirmed that someone else had already solved the problem for me. So credit to &ldquo;codaddict&rdquo; on StackOverflow for <a href="https://stackoverflow.com/questions/2582940/how-do-i-remove-duplicate-characters-and-keep-the-unique-one-only-in-perl">their answer</a>.</p>
 
@@ -107,9 +107,9 @@ So this post will deal with the 9th challenge so far. Check out this challenge, 
 <blockquote>
 <p>Write a script to perform different types of ranking as described below:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">1. Standard Ranking (1224): Items that compare equal receive the same ranking number, and then a gap is left in the ranking numbers.
+<pre><code>1. Standard Ranking (1224): Items that compare equal receive the same ranking number, and then a gap is left in the ranking numbers.
 2. Modified Ranking (1334): It is done by leaving the gaps in the ranking numbers before the sets of equal-ranking items.
-3. Dense Ranking    (1223): Items that compare equally receive the same ranking number, and the next item(s) receive the immediately following ranking number.</pre></div>
+3. Dense Ranking    (1223): Items that compare equally receive the same ranking number, and the next item(s) receive the immediately following ranking number.</code></pre>
 <p>I wasn&rsquo;t sure what the expected output would be here, so I opted to produce a table sorted by the ranked item, with three more columns each giving the different rankings for that item.</p>
 
 <p>There was also no input provided, so I used the <a href="https://data.worldbank.org/indicator/SI.POV.GINI">World Bank&rsquo;s estimate</a> of the <a href="https://en.wikipedia.org/wiki/Gini_coefficient">Gini index</a>, a statistic used to measure wealth inequality. The item to rank, therefore, was the Gini index value for each country on the list. Countries without any ranking were sorted to the bottom and displayed with a value of NA for the Gini index.</p>
@@ -125,7 +125,7 @@ say <span style="color:#e6db74">&#34;Country\tGini (World Bank)\tStandard Rankin
         say <span style="color:#e6db74">&#34;$c\t$g\t&#34;</span> <span style="color:#f92672">.</span> ($running_count<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;\t&#34;</span> <span style="color:#f92672">.</span> ($running_count<span style="color:#f92672">+</span>@countries) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;\t&#34;</span> <span style="color:#f92672">.</span> $dr;
     }
     $running_count <span style="color:#f92672">+=</span> @countries;
-    $dr<span style="color:#f92672">++</span>;
+    $dr<span style="color:#f92672">+</span><span style="color:#f92672">+</span>;
 }</code></pre></div>
 <p>The data is read into a hash before this code is executed. The keys are the Gini index and the values are an arrayref of the countries with that Gini index value. The items to iterate over are simply a sorted list of the keys in the data. Here that means a numerically descending list of the Gini index values, which could be accomplished with a simple <code>sort {$b &lt;=&gt; $a} keys %data</code>.</p>
 

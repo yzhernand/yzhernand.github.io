@@ -3,7 +3,7 @@
   <head>
     <title>Perl Weekly Challenge 13: Last Friday of the month / Mutually recursive methods // Yozen Hernandez</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.60.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Yozen Hernandez" />
     <meta name="description" content="" />
@@ -22,8 +22,8 @@ This week&rsquo;s Perl Weekly Challenge had two fairly fun challenges, and a 3rd
 Challenge 1  Write a script to print the date of last Friday of every month of a given year." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yzhernand.github.io/posts/perl-weekly-challenge-13/" />
-<meta property="article:published_time" content="2019-06-21T10:26:18-04:00"/>
-<meta property="article:modified_time" content="2019-06-21T10:26:18-04:00"/>
+<meta property="article:published_time" content="2019-06-21T10:26:18-04:00" />
+<meta property="article:modified_time" content="2019-06-21T10:26:18-04:00" />
 
 
   </head>
@@ -86,22 +86,22 @@ Challenge 1  Write a script to print the date of last Friday of every month of a
 
 <span style="color:#66d9ef">my</span> $year <span style="color:#f92672">=</span> shift <span style="color:#f92672">or</span> die <span style="color:#e6db74">&#34;Usage: $0 &lt;year&gt;\n&#34;</span>;
 
-<span style="color:#66d9ef">my</span> $dt <span style="color:#f92672">=</span> DateTime<span style="color:#f92672">-&gt;</span><span style="color:#66d9ef">new</span>(
-    month <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">1</span>,
-    day   <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">1</span>,
-    year  <span style="color:#f92672">=&gt;</span> $year
+<span style="color:#66d9ef">my</span> $dt <span style="color:#f92672">=</span> DateTime<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span><span style="color:#66d9ef">new</span>(
+    month <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>,
+    day   <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>,
+    year  <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> $year
 );
-<span style="color:#66d9ef">my</span> $add_week <span style="color:#f92672">=</span> DateTime::Duration<span style="color:#f92672">-&gt;</span><span style="color:#66d9ef">new</span>( weeks <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">1</span> );
-<span style="color:#66d9ef">my</span> $add_day  <span style="color:#f92672">=</span> DateTime::Duration<span style="color:#f92672">-&gt;</span><span style="color:#66d9ef">new</span>( days  <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">1</span> );</code></pre></div>
+<span style="color:#66d9ef">my</span> $add_week <span style="color:#f92672">=</span> DateTime::Duration<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span><span style="color:#66d9ef">new</span>( weeks <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> );
+<span style="color:#66d9ef">my</span> $add_day  <span style="color:#f92672">=</span> DateTime::Duration<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span><span style="color:#66d9ef">new</span>( days  <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> );</code></pre></div>
 <p>In my solution, I take a fairly simple approach. In the block above, I set up a few variables: the year comes from the user on the command line, the <code>$dt</code> variable is a <code>DateTime</code> object that I will use as a sort of &ldquo;cursor&rdquo; to keep track of where we are in the year, and the last two variables (<code>$add_week</code> and <code>$add_day</code>) are <code>DateTime::Duration</code> objects for my convenience. I will use those two variables to &ldquo;walk&rdquo; along the dates in a year. You&rsquo;ll see what I mean below.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">while</span> ( $dt<span style="color:#f92672">-&gt;</span>day_of_week() <span style="color:#f92672">!=</span> <span style="color:#ae81ff">5</span> ) { $dt<span style="color:#f92672">-&gt;</span>add($add_day); }</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">while</span> ( $dt<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>day_of_week() <span style="color:#f92672">!=</span> <span style="color:#ae81ff">5</span> ) { $dt<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>add($add_day); }</code></pre></div>
 <p>In the set up block I showed earlier, <code>$dt</code> was initialized to be the first date in the given year, which is always January 1. The first while loop in this block adds (using <a href="https://metacpan.org/pod/DateTime#$dt-%3Eadd(-parameters-for-DateTime::Duration-)"><code>DateTime::add</code></a>) one day so long as the current date in <code>$dt</code> is not a Friday. So if January 1st was not a Friday, keep adding one day until we arrive at a Friday. If it was, we don&rsquo;t add any days at all.</p>
 
 <p>That&rsquo;s what the <code>$add_day</code> variable is used for. The <code>DateTime</code> module provides an alternative way of calling that function, allowing us to give the same parameters we needed to create a new <code>DateTime::Duration</code> object (eg, <code>$dt-&gt;add(days  =&gt; 1)</code>). This form of the call creates a new <code>DateTime::Duration</code> object on each invocation, which is why I decided to avoid it and instead keep an already initialized variable for this purpose. Even if some internal optimization were smart enough to eliminate any potential slowdown for me, I still prefer being explicit about what I am doing in the code.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">my</span> %last_fri;
-<span style="color:#66d9ef">while</span> ( $dt<span style="color:#f92672">-&gt;</span>year <span style="color:#f92672">==</span> $year ) {
-    $last_fri{ $dt<span style="color:#f92672">-&gt;</span>month } <span style="color:#f92672">=</span> $dt<span style="color:#f92672">-&gt;</span>ymd(<span style="color:#e6db74">&#34;/&#34;</span>);
-    $dt<span style="color:#f92672">-&gt;</span>add($add_week);
+<span style="color:#66d9ef">while</span> ( $dt<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>year <span style="color:#f92672">==</span> $year ) {
+    $last_fri{ $dt<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>month } <span style="color:#f92672">=</span> $dt<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>ymd(<span style="color:#e6db74">&#34;/&#34;</span>);
+    $dt<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>add($add_week);
 }</code></pre></div>
 <p>Now we walk along by weeks (using <code>$add_week</code>, with the same motivations for using a variable as above). I use a hash and save the string representation of the date, in &ldquo;y/m/d&rdquo; format, of every Friday in the year using the numeric value of the month as the key. This gives the nice side effect of only saving the last Friday for the month, as the previous Fridays get overwritten so long as the month is the same, which is what the challenge asked us to do.</p>
 
@@ -125,11 +125,11 @@ first in turn. Using the mutually recursive methods, generate <a href="https://e
 </blockquote>
 
 <p>Recursive methods can be fun to write, but I&rsquo;ve never done mutually recursive methods. This was a deceptively easy challenge. Once I wrote it, I sort of thought to myself &ldquo;that can&rsquo;t be all, right?&rdquo;. So of course, I jazzed it up a bit:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">use</span> feature <span style="color:#e6db74">qw(say state)</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">use</span> feature <span style="color:#e6db74">qw(</span><span style="color:#e6db74">say state</span><span style="color:#e6db74">)</span>;
 
 <span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">hofstadter_F</span> {
     <span style="color:#66d9ef">my</span> $n <span style="color:#f92672">=</span> shift;
-    state %cache <span style="color:#f92672">=</span> ( <span style="color:#ae81ff">0</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">1</span> );
+    state %cache <span style="color:#f92672">=</span> ( <span style="color:#ae81ff">0</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> );
 
     <span style="color:#66d9ef">return</span> $cache{$n} <span style="color:#66d9ef">if</span> exists $cache{$n};
     <span style="color:#66d9ef">return</span> $cache{$n} <span style="color:#f92672">=</span> $n <span style="color:#f92672">-</span> hofstadter_M( hofstadter_F( $n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ) );
@@ -137,7 +137,7 @@ first in turn. Using the mutually recursive methods, generate <a href="https://e
 
 <span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">hofstadter_M</span> {
     <span style="color:#66d9ef">my</span> $n <span style="color:#f92672">=</span> shift;
-    state %cache <span style="color:#f92672">=</span> ( <span style="color:#ae81ff">0</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span> );
+    state %cache <span style="color:#f92672">=</span> ( <span style="color:#ae81ff">0</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> );
 
     <span style="color:#66d9ef">return</span> $cache{$n} <span style="color:#66d9ef">if</span> exists $cache{$n};
     <span style="color:#66d9ef">return</span> $cache{$n} <span style="color:#f92672">=</span> $n <span style="color:#f92672">-</span> hofstadter_F( hofstadter_M( $n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ) );

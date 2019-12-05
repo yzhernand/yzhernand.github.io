@@ -3,7 +3,7 @@
   <head>
     <title>Perl Weekly Challenge 15, Part 2: Encrypting/Decrypting With the Vigenère Cipher // Yozen Hernandez</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.60.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Yozen Hernandez" />
     <meta name="description" content="" />
@@ -22,8 +22,8 @@ Challenge 2  Write a script to implement Vigenère cipher. The script should be 
  This seemed like a cool challenge to tackle. Knowing next to nothing about encryption, I was worried that this would take me all week." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yzhernand.github.io/posts/perl-weekly-challenge-15-part2/" />
-<meta property="article:published_time" content="2019-07-04T23:44:35-04:00"/>
-<meta property="article:modified_time" content="2019-07-04T23:44:35-04:00"/>
+<meta property="article:published_time" content="2019-07-04T23:44:35-04:00" />
+<meta property="article:modified_time" content="2019-07-04T23:44:35-04:00" />
 
 
   </head>
@@ -83,9 +83,9 @@ Challenge 2  Write a script to implement Vigenère cipher. The script should be 
 <p>The idea behind the Vigenère cipher (which should probably be called the <em>Bellaso</em> cipher as <a href="https://en.wikipedia.org/wiki/Giovan_Battista_Bellaso">Giovan Battista Bellaso</a> was the first one to describe it), is that a message is encrypted using a key and each letter in the key changes the the &ldquo;alphabet&rdquo; of each letter of the message. The simplest form of such a cipher is the <a href="https://en.wikipedia.org/wiki/Caesar_cipher">Caesar cipher</a>, where a message is &ldquo;encrypted&rdquo; (because it can hardly be called encryption by today&rsquo;s standards) by picking a fixed shift length and then &ldquo;rotating&rdquo; the alphabet. Say you picked a left shift of 10, then &ldquo;A&rdquo; would be represented by &ldquo;Q&rdquo;, &ldquo;B&rdquo; by &ldquo;R&rdquo;, and so on. The Vigenère cipher uses a key to change the shift every letter.</p>
 
 <p>Wikipedia&rsquo;s example gives a message of &ldquo;ATTACKATDAWN&rdquo; and a key &ldquo;LEMON&rdquo;. The key is shorter than the message, so it will need to be repeated, cycling around as many times as needed to cover the message. Then, each corresponding letter in the key determines the alphabetic &ldquo;shift&rdquo; to encode the message. Since the key is needed to determine the shift of every letter, this cipher was long held as being &ldquo;indecipherable&rdquo; (though nothing lasts forever).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">Plaintext:  ATTACKATDAWN
+<pre><code>Plaintext:  ATTACKATDAWN
 Key:        LEMONLEMONLE
-Ciphertext: LXFOPVEFRNHR</pre></div>
+Ciphertext: LXFOPVEFRNHR</code></pre>
 <p>The first &ldquo;L&rdquo; in &ldquo;LEMON&rdquo; indicates a shift of 11, since &ldquo;L&rdquo; is eleven letters away from &ldquo;A&rdquo;. The &ldquo;E&rdquo; indicates a shift of 4, and so on. Looking at the &ldquo;ciphertext&rdquo; above, you might notice that &ldquo;A&rdquo;s always shift to the letter in the key, but this turns out not to be relevant to the solution, at least not my solution.</p>
 
 <p>By now it becomes immediately obvious what must be done: using the numeric values for each letter in the alphabet, do some simple arithmetic to convert each letter in the message into a different letter determined by the numeric value of the key at a position. Since keys can be shorter than the message, you need to use modulo to wrap around the key when processing long messages.</p>
@@ -94,7 +94,7 @@ Ciphertext: LXFOPVEFRNHR</pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">use</span> v5<span style="color:#ae81ff">.24</span>;
 <span style="color:#66d9ef">use</span> strict;
 <span style="color:#66d9ef">use</span> warnings;
-<span style="color:#66d9ef">use</span> feature <span style="color:#e6db74">qw(say state signatures)</span>;
+<span style="color:#66d9ef">use</span> feature <span style="color:#e6db74">qw(</span><span style="color:#e6db74">say state signatures</span><span style="color:#e6db74">)</span>;
 <span style="color:#66d9ef">no</span> warnings <span style="color:#e6db74">&#34;experimental::signatures&#34;</span>;
 <span style="color:#66d9ef">use</span> Carp;
 
@@ -133,11 +133,11 @@ Ciphertext: LXFOPVEFRNHR</pre></div>
 <span style="color:#66d9ef">my</span> $key  <span style="color:#f92672">=</span> $ARGV[<span style="color:#ae81ff">1</span>] <span style="color:#e6db74">//</span> <span style="color:#e6db74">&#34;LEMON&#34;</span>;
 
 <span style="color:#75715e"># Encrypt</span>
-<span style="color:#66d9ef">my</span> $encrypted <span style="color:#f92672">=</span> encode_vigenere( message <span style="color:#f92672">=&gt;</span> $message, key <span style="color:#f92672">=&gt;</span> $key );
+<span style="color:#66d9ef">my</span> $encrypted <span style="color:#f92672">=</span> encode_vigenere( message <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> $message, key <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> $key );
 say <span style="color:#e6db74">&#34;Encrypted: $encrypted&#34;</span>;
 
 <span style="color:#75715e"># Decrypt</span>
-<span style="color:#66d9ef">my</span> $decoded <span style="color:#f92672">=</span> decode_vigenere( message <span style="color:#f92672">=&gt;</span> $encrypted, key <span style="color:#f92672">=&gt;</span> $key );
+<span style="color:#66d9ef">my</span> $decoded <span style="color:#f92672">=</span> decode_vigenere( message <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> $encrypted, key <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> $key );
 say <span style="color:#e6db74">&#34;Decrypted: $decoded&#34;</span>;</code></pre></div>
 <p>I built a hash which mapped uppercase Latin letters to a numeric equivalent, and called that <code>%tabula</code> after the term <em>tabula recta</em> used by the people actually using this cipher. Now I&rsquo;ve got a mapping between letters and numbers which matches the actual mapping used.</p>
 
@@ -164,21 +164,21 @@ say <span style="color:#e6db74">&#34;Decrypted: $decoded&#34;</span>;</code></pr
 <span style="color:#66d9ef">my</span> $key  <span style="color:#f92672">=</span> $ARGV[<span style="color:#ae81ff">1</span>] <span style="color:#e6db74">//</span> <span style="color:#e6db74">&#34;LEMON&#34;</span>;
 
 <span style="color:#75715e"># Encrypt</span>
-<span style="color:#66d9ef">my</span> $encrypted <span style="color:#f92672">=</span> vigenere( message <span style="color:#f92672">=&gt;</span> $message, key <span style="color:#f92672">=&gt;</span> $key );
+<span style="color:#66d9ef">my</span> $encrypted <span style="color:#f92672">=</span> vigenere( message <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> $message, key <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> $key );
 say <span style="color:#e6db74">&#34;Encrypted: $encrypted&#34;</span>;
 
 <span style="color:#75715e"># Decrypt</span>
-<span style="color:#66d9ef">my</span> $decoded <span style="color:#f92672">=</span> vigenere( message <span style="color:#f92672">=&gt;</span> $encrypted, key <span style="color:#f92672">=&gt;</span> $key, decode <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">1</span> );
+<span style="color:#66d9ef">my</span> $decoded <span style="color:#f92672">=</span> vigenere( message <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> $encrypted, key <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> $key, decode <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> );
 say <span style="color:#e6db74">&#34;Decrypted: $decoded&#34;</span>;</code></pre></div>
 <p>Supply any non-0 value to the <code>decode</code> option in the <code>vigenere</code> function to decode rather than encode. I think I would be happy with that, and we could always add wrapper functions to hide that away from the user and still cut down on code repetition:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">encode_vigenere</span> {
     <span style="color:#66d9ef">my</span> %args <span style="color:#f92672">=</span> @_;
-    vigenere(%args, decode <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span>);
+    vigenere(%args, decode <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>);
 }
 
 <span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">decode_vigenere</span> {
     <span style="color:#66d9ef">my</span> %args <span style="color:#f92672">=</span> @_;
-    vigenere(%args, decode <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">1</span>);
+    vigenere(%args, decode <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>);
 }</code></pre></div>
 <p>Now, even if the user supplies some other value for <code>decode</code>, as long as they use the correct wrapper function, they will get the result they wanted.</p>
 

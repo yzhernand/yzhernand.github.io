@@ -3,7 +3,7 @@
   <head>
     <title>Perl Weekly Challenge 17: Writing Our Own URL Parser in Perl (But Should We?) // Yozen Hernandez</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.60.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Yozen Hernandez" />
     <meta name="description" content="" />
@@ -26,8 +26,8 @@ For example: jdbc:mysql://user:password@localhost:3306/pwc?profile=true#h1
  scheme: jdbc:mysql userinfo: user:password host: localhost port: 3306 path: /pwc query: profile=true fragment: h1 Sounds good. Let&rsquo;s try to parse this out. Maybe we&rsquo;ll use a few regex&rsquo;s, and that&rsquo;ll be it." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yzhernand.github.io/posts/perl-weekly-challenge-17-2/" />
-<meta property="article:published_time" content="2019-07-19T07:07:57-04:00"/>
-<meta property="article:modified_time" content="2019-07-19T07:07:57-04:00"/>
+<meta property="article:published_time" content="2019-07-19T07:07:57-04:00" />
+<meta property="article:modified_time" content="2019-07-19T07:07:57-04:00" />
 
 
   </head>
@@ -81,13 +81,13 @@ For example: jdbc:mysql://user:password@localhost:3306/pwc?profile=true#h1
 
 <p>For example: <strong>jdbc:mysql://user:password@localhost:3306/pwc?profile=true#h1</strong></p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">scheme:   jdbc:mysql
+<pre><code>scheme:   jdbc:mysql
 userinfo: user:password
 host:     localhost
 port:     3306
 path:     /pwc
 query:    profile=true
-fragment: h1</pre></div>
+fragment: h1</code></pre>
 <p>Sounds good. Let&rsquo;s try to parse this out. Maybe we&rsquo;ll use a few regex&rsquo;s, and that&rsquo;ll be it.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">parse_url_regex</span>($url) {
     <span style="color:#66d9ef">my</span> %parsed;
@@ -135,10 +135,10 @@ fragment: h1</pre></div>
 }</code></pre></div>
 <p>Well that&rsquo;s a lot of <code>(els)if</code>s and regex&rsquo;s. I&rsquo;m not sure I&rsquo;d want to maintain that. Plus, I&rsquo;m sure it&rsquo;s full of bugs.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">print_parsed</span> ($url_hash_ref) {
-    <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">my</span> $part (<span style="color:#e6db74">qw(scheme userinfo host port path query fragment)</span>) {
-        say <span style="color:#e6db74">&#34;$part:\t&#34;</span> <span style="color:#f92672">.</span> $url_hash_ref<span style="color:#f92672">-&gt;</span>{$part}
-            <span style="color:#66d9ef">if</span> exists $url_hash_ref<span style="color:#f92672">-&gt;</span>{$part}
-            <span style="color:#f92672">&amp;&amp;</span> defined $url_hash_ref<span style="color:#f92672">-&gt;</span>{$part};
+    <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">my</span> $part (<span style="color:#e6db74">qw(</span><span style="color:#e6db74">scheme userinfo host port path query fragment</span><span style="color:#e6db74">)</span>) {
+        say <span style="color:#e6db74">&#34;$part:\t&#34;</span> <span style="color:#f92672">.</span> $url_hash_ref<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>{$part}
+            <span style="color:#66d9ef">if</span> exists $url_hash_ref<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>{$part}
+            <span style="color:#f92672">&amp;&amp;</span> defined $url_hash_ref<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>{$part};
     }
     say <span style="color:#e6db74">&#34;&#34;</span>;
 }
@@ -185,51 +185,51 @@ print_parsed(
 
 <p>This is the sort of problem that I would rather reach for a well-established module if I ever needed to do this in production. So let&rsquo;s use a module I know that does that job well, <a href="https://mojolicious.org/perldoc/Mojo/URL"><code>Mojo::URL</code></a>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">use</span> Mojo::URL;
-<span style="color:#66d9ef">use</span> Mojo::Util <span style="color:#e6db74">qw(decode url_unescape)</span>;
+<span style="color:#66d9ef">use</span> Mojo::Util <span style="color:#e6db74">qw(</span><span style="color:#e6db74">decode url_unescape</span><span style="color:#e6db74">)</span>;
 
-<span style="color:#66d9ef">use</span> Test::More tests <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">7</span>;
+<span style="color:#66d9ef">use</span> Test::More tests <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">7</span>;
 <span style="color:#66d9ef">my</span> $parsed_regex
     <span style="color:#f92672">=</span> parse_url_regex(
     <span style="color:#e6db74">q&#34;http://JP納豆.例.jp:80/dir1/引き割り.html?q=クエリ#メイン&#34;</span>
     );
 <span style="color:#66d9ef">my</span> $parsed_mojo
-    <span style="color:#f92672">=</span> Mojo::URL<span style="color:#f92672">-&gt;</span><span style="color:#66d9ef">new</span>(
+    <span style="color:#f92672">=</span> Mojo::URL<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span><span style="color:#66d9ef">new</span>(
     <span style="color:#e6db74">q&#34;http://JP納豆.例.jp:80/dir1/引き割り.html?q=クエリ#メイン&#34;</span>
     );
-is( $parsed_mojo<span style="color:#f92672">-&gt;</span>scheme,
-    $parsed_regex<span style="color:#f92672">-&gt;</span>{scheme},
+is( $parsed_mojo<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>scheme,
+    $parsed_regex<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>{scheme},
     <span style="color:#e6db74">&#34;Mojo and regex sub agree on &#39;scheme&#39;&#34;</span>
 );
-is( $parsed_mojo<span style="color:#f92672">-&gt;</span>userinfo <span style="color:#e6db74">//</span> <span style="color:#e6db74">&#39;&#39;</span>,
-    $parsed_regex<span style="color:#f92672">-&gt;</span>{userinfo},
+is( $parsed_mojo<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>userinfo <span style="color:#e6db74">//</span> <span style="color:#e6db74">&#39;&#39;</span>,
+    $parsed_regex<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>{userinfo},
     <span style="color:#e6db74">&#34;Mojo and regex sub agree on &#39;userinfo&#39;&#34;</span>
 );
-is( $parsed_mojo<span style="color:#f92672">-&gt;</span>host, $parsed_regex<span style="color:#f92672">-&gt;</span>{host},
+is( $parsed_mojo<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>host, $parsed_regex<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>{host},
     <span style="color:#e6db74">&#34;Mojo and regex sub agree on &#39;host&#39;&#34;</span> );
-is( $parsed_mojo<span style="color:#f92672">-&gt;</span>port, $parsed_regex<span style="color:#f92672">-&gt;</span>{port},
+is( $parsed_mojo<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>port, $parsed_regex<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>{port},
     <span style="color:#e6db74">&#34;Mojo and regex sub agree on &#39;port&#39;&#34;</span> );
-is( decode( <span style="color:#e6db74">&#39;UTF-8&#39;</span>, url_unescape( $parsed_mojo<span style="color:#f92672">-&gt;</span>path ) ),
-    $parsed_regex<span style="color:#f92672">-&gt;</span>{path}, <span style="color:#e6db74">&#34;Mojo and regex sub agree on &#39;path&#39;&#34;</span> );
-is( decode( <span style="color:#e6db74">&#39;UTF-8&#39;</span>, url_unescape( $parsed_mojo<span style="color:#f92672">-&gt;</span>query ) ),
-    $parsed_regex<span style="color:#f92672">-&gt;</span>{query},
+is( decode( <span style="color:#e6db74">&#39;UTF-8&#39;</span>, url_unescape( $parsed_mojo<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>path ) ),
+    $parsed_regex<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>{path}, <span style="color:#e6db74">&#34;Mojo and regex sub agree on &#39;path&#39;&#34;</span> );
+is( decode( <span style="color:#e6db74">&#39;UTF-8&#39;</span>, url_unescape( $parsed_mojo<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>query ) ),
+    $parsed_regex<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>{query},
     <span style="color:#e6db74">&#34;Mojo and regex sub agree on &#39;query&#39;&#34;</span>
 );
-is( $parsed_mojo<span style="color:#f92672">-&gt;</span>fragment,
-    $parsed_regex<span style="color:#f92672">-&gt;</span>{fragment},
+is( $parsed_mojo<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>fragment,
+    $parsed_regex<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>{fragment},
     <span style="color:#e6db74">&#34;Mojo and regex sub agree on &#39;fragment&#39;&#34;</span>
-);</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">ok 1 - Mojo and regex sub agree on &#39;scheme&#39;
-ok 2 - Mojo and regex sub agree on &#39;userinfo&#39;
-ok 3 - Mojo and regex sub agree on &#39;host&#39;
-ok 4 - Mojo and regex sub agree on &#39;port&#39;
-ok 5 - Mojo and regex sub agree on &#39;path&#39;
-ok 6 - Mojo and regex sub agree on &#39;query&#39;
-ok 7 - Mojo and regex sub agree on &#39;fragment&#39;</pre></div>
+);</code></pre></div><pre><code>ok 1 - Mojo and regex sub agree on 'scheme'
+ok 2 - Mojo and regex sub agree on 'userinfo'
+ok 3 - Mojo and regex sub agree on 'host'
+ok 4 - Mojo and regex sub agree on 'port'
+ok 5 - Mojo and regex sub agree on 'path'
+ok 6 - Mojo and regex sub agree on 'query'
+ok 7 - Mojo and regex sub agree on 'fragment'</code></pre>
 <p>Looks like we did pretty well! You&rsquo;ll notice that since the URL I chose to use includes non-ASCII characters, and <code>Mojo::URL</code> returns strings that are <a href="https://en.wikipedia.org/wiki/Percent-encoding">URL-encoded</a>, I had to unescape the URLs and then decode the unicode strings in order to compare them to what my code returned. Also, since I define missing fields as the empty string instead of setting them to <code>undef</code>, I had to use <code>// ''</code> for the <code>userinfo</code> attribute from <code>Mojo::URL</code>.</p>
 
 <p>Ok so we don&rsquo;t seem to run into any errors, and we actually agree (where it counts?) with an established module. Surely there must be some performance cost to doing it this way, right? Let&rsquo;s go back to our trusty <a href="https://metacpan.org/pod/Benchmark::Forking"><code>Benchmark::Forking</code></a> module:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">                       Rate               mojo from_scratch_regex
+<pre><code>                       Rate               mojo from_scratch_regex
 mojo                31204/s                 --               -72%
-from_scratch_regex 110892/s               255%                 --</pre></div>
+from_scratch_regex 110892/s               255%                 --</code></pre>
 <p>Whaaa? We do about 255% better than <code>Mojo::URL</code>? On second thought, that probably makes sense. I&rsquo;m sure a whole lot more going on inside that module to make sure things are way safer than any thing my code does, and it implements a whole class with stringification, etc.</p>
 
 <p>So, it passes all my tests, seems to agree with a well-established module, and even beats it in speed. This is ready to use in your, or my, next project right??</p>
