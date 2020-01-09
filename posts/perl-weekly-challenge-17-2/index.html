@@ -3,7 +3,7 @@
   <head>
     <title>Perl Weekly Challenge 17: Writing Our Own URL Parser in Perl (But Should We?) // Yozen Hernandez</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.60.1" />
+    <meta name="generator" content="Hugo 0.62.2" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Yozen Hernandez" />
     <meta name="description" content="" />
@@ -48,6 +48,16 @@ For example: jdbc:mysql://user:password@localhost:3306/pwc?profile=true#h1
   <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
 </svg></a>
         
+          <a target="_blank" href="https://www.linkedin.com/in/yzhernand/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>linkedin</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg></a>
+        
+          <a target="_blank" href="https://www.researchgate.net/profile/Yoezen_Hernandez"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg></a>
+        
       </div>
     </header>
     <main class="app-container">
@@ -81,13 +91,13 @@ For example: jdbc:mysql://user:password@localhost:3306/pwc?profile=true#h1
 
 <p>For example: <strong>jdbc:mysql://user:password@localhost:3306/pwc?profile=true#h1</strong></p>
 </blockquote>
-<pre><code>scheme:   jdbc:mysql
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">scheme:   jdbc:mysql
 userinfo: user:password
 host:     localhost
 port:     3306
 path:     /pwc
 query:    profile=true
-fragment: h1</code></pre>
+fragment: h1</code></pre></div>
 <p>Sounds good. Let&rsquo;s try to parse this out. Maybe we&rsquo;ll use a few regex&rsquo;s, and that&rsquo;ll be it.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">parse_url_regex</span>($url) {
     <span style="color:#66d9ef">my</span> %parsed;
@@ -217,19 +227,19 @@ is( decode( <span style="color:#e6db74">&#39;UTF-8&#39;</span>, url_unescape( $p
 is( $parsed_mojo<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>fragment,
     $parsed_regex<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>{fragment},
     <span style="color:#e6db74">&#34;Mojo and regex sub agree on &#39;fragment&#39;&#34;</span>
-);</code></pre></div><pre><code>ok 1 - Mojo and regex sub agree on 'scheme'
-ok 2 - Mojo and regex sub agree on 'userinfo'
-ok 3 - Mojo and regex sub agree on 'host'
-ok 4 - Mojo and regex sub agree on 'port'
-ok 5 - Mojo and regex sub agree on 'path'
-ok 6 - Mojo and regex sub agree on 'query'
-ok 7 - Mojo and regex sub agree on 'fragment'</code></pre>
+);</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ok 1 - Mojo and regex sub agree on &#39;scheme&#39;
+ok 2 - Mojo and regex sub agree on &#39;userinfo&#39;
+ok 3 - Mojo and regex sub agree on &#39;host&#39;
+ok 4 - Mojo and regex sub agree on &#39;port&#39;
+ok 5 - Mojo and regex sub agree on &#39;path&#39;
+ok 6 - Mojo and regex sub agree on &#39;query&#39;
+ok 7 - Mojo and regex sub agree on &#39;fragment&#39;</code></pre></div>
 <p>Looks like we did pretty well! You&rsquo;ll notice that since the URL I chose to use includes non-ASCII characters, and <code>Mojo::URL</code> returns strings that are <a href="https://en.wikipedia.org/wiki/Percent-encoding">URL-encoded</a>, I had to unescape the URLs and then decode the unicode strings in order to compare them to what my code returned. Also, since I define missing fields as the empty string instead of setting them to <code>undef</code>, I had to use <code>// ''</code> for the <code>userinfo</code> attribute from <code>Mojo::URL</code>.</p>
 
 <p>Ok so we don&rsquo;t seem to run into any errors, and we actually agree (where it counts?) with an established module. Surely there must be some performance cost to doing it this way, right? Let&rsquo;s go back to our trusty <a href="https://metacpan.org/pod/Benchmark::Forking"><code>Benchmark::Forking</code></a> module:</p>
-<pre><code>                       Rate               mojo from_scratch_regex
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">                       Rate               mojo from_scratch_regex
 mojo                31204/s                 --               -72%
-from_scratch_regex 110892/s               255%                 --</code></pre>
+from_scratch_regex 110892/s               255%                 --</code></pre></div>
 <p>Whaaa? We do about 255% better than <code>Mojo::URL</code>? On second thought, that probably makes sense. I&rsquo;m sure a whole lot more going on inside that module to make sure things are way safer than any thing my code does, and it implements a whole class with stringification, etc.</p>
 
 <p>So, it passes all my tests, seems to agree with a well-established module, and even beats it in speed. This is ready to use in your, or my, next project right??</p>

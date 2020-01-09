@@ -3,7 +3,7 @@
   <head>
     <title>Perl Weekly Challenge 15, Part 2: Encrypting/Decrypting With the Vigenère Cipher // Yozen Hernandez</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.60.1" />
+    <meta name="generator" content="Hugo 0.62.2" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Yozen Hernandez" />
     <meta name="description" content="" />
@@ -42,6 +42,16 @@ Challenge 2  Write a script to implement Vigenère cipher. The script should be 
           <a target="_blank" href="https://twitter.com/yzhernand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
   <title>twitter</title>
   <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://www.linkedin.com/in/yzhernand/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>linkedin</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg></a>
+        
+          <a target="_blank" href="https://www.researchgate.net/profile/Yoezen_Hernandez"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
 </svg></a>
         
       </div>
@@ -83,9 +93,9 @@ Challenge 2  Write a script to implement Vigenère cipher. The script should be 
 <p>The idea behind the Vigenère cipher (which should probably be called the <em>Bellaso</em> cipher as <a href="https://en.wikipedia.org/wiki/Giovan_Battista_Bellaso">Giovan Battista Bellaso</a> was the first one to describe it), is that a message is encrypted using a key and each letter in the key changes the the &ldquo;alphabet&rdquo; of each letter of the message. The simplest form of such a cipher is the <a href="https://en.wikipedia.org/wiki/Caesar_cipher">Caesar cipher</a>, where a message is &ldquo;encrypted&rdquo; (because it can hardly be called encryption by today&rsquo;s standards) by picking a fixed shift length and then &ldquo;rotating&rdquo; the alphabet. Say you picked a left shift of 10, then &ldquo;A&rdquo; would be represented by &ldquo;Q&rdquo;, &ldquo;B&rdquo; by &ldquo;R&rdquo;, and so on. The Vigenère cipher uses a key to change the shift every letter.</p>
 
 <p>Wikipedia&rsquo;s example gives a message of &ldquo;ATTACKATDAWN&rdquo; and a key &ldquo;LEMON&rdquo;. The key is shorter than the message, so it will need to be repeated, cycling around as many times as needed to cover the message. Then, each corresponding letter in the key determines the alphabetic &ldquo;shift&rdquo; to encode the message. Since the key is needed to determine the shift of every letter, this cipher was long held as being &ldquo;indecipherable&rdquo; (though nothing lasts forever).</p>
-<pre><code>Plaintext:  ATTACKATDAWN
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Plaintext:  ATTACKATDAWN
 Key:        LEMONLEMONLE
-Ciphertext: LXFOPVEFRNHR</code></pre>
+Ciphertext: LXFOPVEFRNHR</code></pre></div>
 <p>The first &ldquo;L&rdquo; in &ldquo;LEMON&rdquo; indicates a shift of 11, since &ldquo;L&rdquo; is eleven letters away from &ldquo;A&rdquo;. The &ldquo;E&rdquo; indicates a shift of 4, and so on. Looking at the &ldquo;ciphertext&rdquo; above, you might notice that &ldquo;A&rdquo;s always shift to the letter in the key, but this turns out not to be relevant to the solution, at least not my solution.</p>
 
 <p>By now it becomes immediately obvious what must be done: using the numeric values for each letter in the alphabet, do some simple arithmetic to convert each letter in the message into a different letter determined by the numeric value of the key at a position. Since keys can be shorter than the message, you need to use modulo to wrap around the key when processing long messages.</p>

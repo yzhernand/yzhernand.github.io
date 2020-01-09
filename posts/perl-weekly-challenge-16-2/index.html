@@ -3,7 +3,7 @@
   <head>
     <title>Perl Weekly Challenge 16: Decoding a Bitcoin Address in Perl // Yozen Hernandez</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.60.1" />
+    <meta name="generator" content="Hugo 0.62.2" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Yozen Hernandez" />
     <meta name="description" content="" />
@@ -42,6 +42,16 @@
   <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
 </svg></a>
         
+          <a target="_blank" href="https://www.linkedin.com/in/yzhernand/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>linkedin</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg></a>
+        
+          <a target="_blank" href="https://www.researchgate.net/profile/Yoezen_Hernandez"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg></a>
+        
       </div>
     </header>
     <main class="app-container">
@@ -78,7 +88,7 @@
 <p>This sort of challenge was new to me. I never dealt with SHA hashes, decoding, or comparing checksums (at least not within Perl). I have done some programming involving byte-wise or bit-wise computation, but definitely not in Perl. It took a couple of hours reading things over in the wiki before I got a handle on what I needed to do.</p>
 
 <p>Each bitcoin address is a number, though a rather large one, encoded in base-58 which just means there are 58 characters which are used to represent values (as opposed to just 10 in base 10, 0-9). The characters are, in increasing value:</p>
-<pre><code>123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz</code></pre></div>
 <p>As stated in the challenge, some characters are omitted since they can be visually confused for each other in some cases: capital letter &ldquo;O&rdquo;, number &ldquo;0&rdquo;, capital letter &ldquo;I&rdquo;, and lowercase letter &ldquo;l&rdquo;.</p>
 
 <p>Now, having an idea of what characters represent what value, here are the steps, roughly, on decoding and validating a bitcoin address:</p>
@@ -106,7 +116,7 @@
 <p>So that doesn&rsquo;t work. Wait, what?</p>
 
 <p>I test the output of my functions as I write them using <a href="https://metacpan.org/pod/Test::More"><code>Test::More</code></a>. Using an online <a href="http://lenschulwitz.com/base58">bitcoin address decoder</a> and the <a href="https://perldoc.pl/functions/pack">pack/unpack</a> functions (which I&rsquo;ve only learned about thanks to these challenges), I compare what I get to the tool&rsquo;s output:</p>
-<pre><code>is(unpack("H*", b58_decode('1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2')), lc'0077BFF20C60E522DFAA3350C39B030A5D004E839AF415766B', "b58 decode works");</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">is(unpack(&#34;H*&#34;, b58_decode(&#39;1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2&#39;)), lc&#39;0077BFF20C60E522DFAA3350C39B030A5D004E839AF415766B&#39;, &#34;b58 decode works&#34;);</code></pre></div>
 <p><code>unpack(&quot;H*&quot;, $blah)</code> converts the whatever bytes are in <code>$blah</code> according to the template <code>&quot;H*&quot;</code>, which means turn into a hex string (in <a href="https://en.wikipedia.org/wiki/Endianness">big-endian</a> order). The return value of the function is converted into hex and then compared to the hex string I know to be the decoded hex value. I use lowercase to convert it since unpack returns a lowercase string.</p>
 
 <p>The numeric value is turned into bytes and returned in the function more or less like this:</p>
