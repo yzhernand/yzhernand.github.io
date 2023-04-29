@@ -2,12 +2,13 @@
 <html lang="en-us">
   <head>
     <title>Perl Weekly Challenge 9 // Yozen Hernandez</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.62.2" />
+    <meta name="generator" content="Hugo 0.111.3">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Yozen Hernandez" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="https://yzhernand.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+    <link rel="stylesheet" href="/css/main.min.e04f32518dbcdbc64ddad5e1768be6d5edcc5cdba41caea400b8b4cdbc17a452.css" />
 
     
     <meta name="twitter:card" content="summary"/>
@@ -21,7 +22,7 @@ So this post will deal with the 9th challenge so far. Check out this challenge, 
 I decided to blog a bit so that I can write about the process that goes into solving the Perl Weekly Challenge that I recently heard about. I love Perl, challenging myself with programming tasks, and procrastination. It all works out!
 So this post will deal with the 9th challenge so far. Check out this challenge, as well as the Perl Weekly Challenge page, here." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://yzhernand.github.io/posts/perl-weekly-challenge-9/" />
+<meta property="og:url" content="https://yzhernand.github.io/posts/perl-weekly-challenge-9/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-05-21T09:25:05-04:00" />
 <meta property="article:modified_time" content="2019-05-21T09:25:05-04:00" />
 
@@ -30,29 +31,41 @@ So this post will deal with the 9th challenge so far. Check out this challenge, 
   <body>
     <header class="app-header">
       <a href="https://yzhernand.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Yozen Hernandez" /></a>
-      <h1>Yozen Hernandez</h1>
-      <p>Bioinformatics guy who programs in Perl, C, and R. Occasionally writes about things.</p>
+      <span class="app-header-title">Yozen Hernandez</span>
+      <p>Bioinformatician who programs in Perl, C, and R. Occasionally writes about things.</p>
       <div class="app-header-social">
         
-          <a target="_blank" href="https://github.com/yzhernand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
-  <title>github</title>
+          <a href="https://github.com/yzhernand" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
   <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-</svg></a>
+</svg>
+          </a>
         
-          <a target="_blank" href="https://twitter.com/yzhernand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
-  <title>twitter</title>
-  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
-</svg></a>
+          <a href="https://fosstodon.org/@yzh" target="_blank" rel="noreferrer noopener me">
+            <span class="icon">
+  <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Mastodon</title><path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/></svg>
+</span>
+          </a>
         
-          <a target="_blank" href="https://www.linkedin.com/in/yzhernand/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
-  <title>linkedin</title>
+          <a href="https://www.linkedin.com/in/yzhernand/" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
   <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
-</svg></a>
+</svg>
+          </a>
         
-          <a target="_blank" href="https://www.researchgate.net/profile/Yoezen_Hernandez"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
-  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-</svg></a>
+          <a href="https://www.researchgate.net/profile/Yoezen_Hernandez" target="_blank" rel="noreferrer noopener me">
+            <span class="icon">
+  <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>ResearchGate</title><path d="M19.586 0c-.818 0-1.508.19-2.073.565-.563.377-.97.936-1.213 1.68a3.193 3.193 0 0 0-.112.437 8.365 8.365 0 0 0-.078.53 9 9 0 0 0-.05.727c-.01.282-.013.621-.013 1.016a31.121 31.123 0 0 0 .014 1.017 9 9 0 0 0 .05.727 7.946 7.946 0 0 0 .077.53h-.005a3.334 3.334 0 0 0 .113.438c.245.743.65 1.303 1.214 1.68.565.376 1.256.564 2.075.564.8 0 1.536-.213 2.105-.603.57-.39.94-.916 1.175-1.65.076-.235.135-.558.177-.93a10.9 10.9 0 0 0 .043-1.207v-.82c0-.095-.047-.142-.14-.142h-3.064c-.094 0-.14.047-.14.141v.956c0 .094.046.14.14.14h1.666c.056 0 .084.03.084.086 0 .36 0 .62-.036.865-.038.244-.1.447-.147.606-.108.385-.348.664-.638.876-.29.212-.738.35-1.227.35-.545 0-.901-.15-1.21-.353-.306-.203-.517-.454-.67-.915a3.136 3.136 0 0 1-.147-.762 17.366 17.367 0 0 1-.034-.656c-.01-.26-.014-.572-.014-.939a26.401 26.403 0 0 1 .014-.938 15.821 15.822 0 0 1 .035-.656 3.19 3.19 0 0 1 .148-.76 1.89 1.89 0 0 1 .742-1.01c.344-.244.593-.352 1.137-.352.508 0 .815.096 1.144.303.33.207.528.492.764.925.047.094.111.118.198.07l1.044-.43c.075-.048.09-.115.042-.199a3.549 3.549 0 0 0-.466-.742 3 3 0 0 0-.679-.607 3.313 3.313 0 0 0-.903-.41A4.068 4.068 0 0 0 19.586 0zM8.217 5.836c-1.69 0-3.036.086-4.297.086-1.146 0-2.291 0-3.007-.029v.831l1.088.2c.744.144 1.174.488 1.174 2.264v11.288c0 1.777-.43 2.12-1.174 2.263l-1.088.2v.832c.773-.029 2.12-.086 3.465-.086 1.29 0 2.951.057 3.667.086v-.831l-1.49-.2c-.773-.115-1.174-.487-1.174-2.264v-4.784c.688.057 1.29.057 2.206.057 1.748 3.123 3.41 5.472 4.355 6.56.86 1.032 2.177 1.691 3.839 1.691.487 0 1.003-.086 1.318-.23v-.744c-1.031 0-2.063-.716-2.808-1.518-1.26-1.376-2.95-3.582-4.355-6.074 2.32-.545 4.04-2.722 4.04-4.9 0-3.208-2.492-4.698-5.758-4.698zm-.515 1.29c2.406 0 3.839 1.26 3.839 3.552 0 2.263-1.547 3.782-4.097 3.782-.974 0-1.404-.03-2.063-.086v-7.19c.66-.059 1.547-.059 2.32-.059z"/></svg>
+</span>
+          </a>
+        
+          <a href="https://orcid.org/0000-0003-3349-8856" target="_blank" rel="noreferrer noopener me">
+            <span class="icon">
+  <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>ORCID</title><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>
+</span>
+          </a>
         
       </div>
     </header>
@@ -63,96 +76,74 @@ So this post will deal with the 9th challenge so far. Check out this challenge, 
       <h1 class ="post-title">Perl Weekly Challenge 9</h1>
       <div class="post-meta">
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
   <title>calendar</title>
   <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
 </svg>
           May 21, 2019
         </div>
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
   <title>clock</title>
   <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
 </svg>
           5 min read
-        </div></div>
+        </div>
+      </div>
     </header>
     <div class="post-content">
-      
-
-<p>This will be my first ever blog post ever. Hi there!</p>
-
+      <p>This will be my first ever blog post ever. Hi there!</p>
 <p>I decided to blog a bit so that I can write about the process that goes into solving the Perl Weekly Challenge that I recently heard about. I love Perl, challenging myself with programming tasks, and procrastination. It all works out!</p>
-
 <p>So this post will deal with the 9th challenge so far. Check out this challenge, as well as the Perl Weekly Challenge page, <a href="https://perlweeklychallenge.org/blog/perl-weekly-challenge-009/">here</a>.</p>
-
 <h1 id="challenge-1">Challenge #1</h1>
-
 <blockquote>
 <p>Write a script that finds the first square number that has at least 5 distinct digits. This was proposed by Laurent Rosenfeld.</p>
 </blockquote>
-
 <p>This was a fun one. In the work I&rsquo;ve done in the past, speed was always important. The more we could cut down run time the better. So I brought that mentality here to this challenge, even if the &ldquo;speedup&rdquo; was probably not worth it and this &ldquo;optimization&rdquo; could hardly be called that.</p>
-
 <p>Anyway, my idea was to just not waste time starting with 1, or 2, or any square root that would not yield at least a 5-digit square. So, for a general case of an n-digit square:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">my</span> $root <span style="color:#f92672">=</span> int( sqrt( <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span>( $n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ) ) );</code></pre></div>
-<p>In this case, if <code>$n = 5</code>, then <del><code>$root = 316</code>. Cool, we just skipped uselessly squaring <code>1 .. 315</code></del> EDIT: This should be 100. I had manually calculated it without subtracting 1 as in my code above. Oops!/EDIT (and possibly checking the squares to see if we satisfied the challenge condition, depending on how you wrote your code).</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-perl" data-lang="perl"><span style="display:flex;"><span><span style="color:#66d9ef">my</span> $root <span style="color:#f92672">=</span> int( sqrt( <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span>( $n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ) ) );
+</span></span></code></pre></div><p>In this case, if <code>$n = 5</code>, then <del><code>$root = 316</code>. Cool, we just skipped uselessly squaring <code>1 .. 315</code></del> EDIT: This should be 100. I had manually calculated it without subtracting 1 as in my code above. Oops!/EDIT (and possibly checking the squares to see if we satisfied the challenge condition, depending on how you wrote your code).</p>
 <p>Next, we have to loop until we find a perfect square which has at least <code>$n</code> unique digits. So I wrote my loop like so:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">while</span> ( <span style="color:#ae81ff">1</span> ) {
-
-    <span style="color:#75715e"># Use positive lookahead to get rid of duplicate digits</span>
-    ( <span style="color:#66d9ef">my</span> $dedup <span style="color:#f92672">=</span> $root<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> ) <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/(.)(?=.*?\1)//g</span>;
-    <span style="color:#66d9ef">last</span> <span style="color:#66d9ef">if</span> ( length($dedup) <span style="color:#f92672">&gt;=</span> $n );
-    $root<span style="color:#f92672">+</span><span style="color:#f92672">+</span>;
-}</code></pre></div>
-<p>I used <a href="https://perldoc.pl/perlretut#Looking-ahead-and-looking-behind">Positive Lookahead</a> to remove characters if they had already occurred in the string. I could have done something else, like splitting the string and using the characters as keys in a hash, but I figured this could be accomplished using regular expressions. Being Truly Lazy™, I searched online before I brushed up on my lookahead knowledge and confirmed that someone else had already solved the problem for me. So credit to &ldquo;codaddict&rdquo; on StackOverflow for <a href="https://stackoverflow.com/questions/2582940/how-do-i-remove-duplicate-characters-and-keep-the-unique-one-only-in-perl">their answer</a>.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-perl" data-lang="perl"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> ( <span style="color:#ae81ff">1</span> ) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Use positive lookahead to get rid of duplicate digits</span>
+</span></span><span style="display:flex;"><span>    ( <span style="color:#66d9ef">my</span> $dedup <span style="color:#f92672">=</span> $root<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> ) <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/(.)(?=.*?\1)//g</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">last</span> <span style="color:#66d9ef">if</span> ( length($dedup) <span style="color:#f92672">&gt;=</span> $n );
+</span></span><span style="display:flex;"><span>    $root<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>I used <a href="https://perldoc.pl/perlretut#Looking-ahead-and-looking-behind">Positive Lookahead</a> to remove characters if they had already occurred in the string. I could have done something else, like splitting the string and using the characters as keys in a hash, but I figured this could be accomplished using regular expressions. Being Truly Lazy™, I searched online before I brushed up on my lookahead knowledge and confirmed that someone else had already solved the problem for me. So credit to &ldquo;codaddict&rdquo; on StackOverflow for <a href="https://stackoverflow.com/questions/2582940/how-do-i-remove-duplicate-characters-and-keep-the-unique-one-only-in-perl">their answer</a>.</p>
 <p>We only exit the loop when we find a square with at least <code>$n</code> unique digits, so setting <code>$n</code> to something like 11 for base 10 will result in an infinite loop.</p>
-
 <p>I&rsquo;m sure I could have done this in some very clever way, but this seems readable to me while also being compact. I&rsquo;m curious to see other&rsquo;s solutions.</p>
-
 <h1 id="challenge-2">Challenge #2</h1>
-
 <blockquote>
 <p>Write a script to perform different types of ranking as described below:</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">1. Standard Ranking (1224): Items that compare equal receive the same ranking number, and then a gap is left in the ranking numbers.
+<pre tabindex="0"><code>1. Standard Ranking (1224): Items that compare equal receive the same ranking number, and then a gap is left in the ranking numbers.
 2. Modified Ranking (1334): It is done by leaving the gaps in the ranking numbers before the sets of equal-ranking items.
-3. Dense Ranking    (1223): Items that compare equally receive the same ranking number, and the next item(s) receive the immediately following ranking number.</code></pre></div>
-<p>I wasn&rsquo;t sure what the expected output would be here, so I opted to produce a table sorted by the ranked item, with three more columns each giving the different rankings for that item.</p>
-
+3. Dense Ranking    (1223): Items that compare equally receive the same ranking number, and the next item(s) receive the immediately following ranking number.
+</code></pre><p>I wasn&rsquo;t sure what the expected output would be here, so I opted to produce a table sorted by the ranked item, with three more columns each giving the different rankings for that item.</p>
 <p>There was also no input provided, so I used the <a href="https://data.worldbank.org/indicator/SI.POV.GINI">World Bank&rsquo;s estimate</a> of the <a href="https://en.wikipedia.org/wiki/Gini_coefficient">Gini index</a>, a statistic used to measure wealth inequality. The item to rank, therefore, was the Gini index value for each country on the list. Countries without any ranking were sorted to the bottom and displayed with a value of NA for the Gini index.</p>
-
 <p>This turned out to be a much simpler problem than I anticipated. Thanks to the descriptions on the <a href="https://en.wikipedia.org/wiki/Ranking">wiki page on ranking</a> for each ranking strategy, I figured I could do this with simply two counters: one for the total number of items ranked so far, and the other for the total number of unique items.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">my</span> $running_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-<span style="color:#66d9ef">my</span> $dr <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-say <span style="color:#e6db74">&#34;Country\tGini (World Bank)\tStandard Ranking\tModified Ranking\tDense Ranking&#34;</span>;
-<span style="color:#66d9ef">for</span> <span style="color:#66d9ef">my</span> $g (sort {$b <span style="color:#e6db74">&lt;=&gt;</span> $a} keys %data) {
-    <span style="color:#66d9ef">my</span> @countries <span style="color:#f92672">=</span> @{$data{$g}};
-    $g <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;NA&#34;</span> <span style="color:#66d9ef">if</span> $g <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-    <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">my</span> $c (@countries) {
-        say <span style="color:#e6db74">&#34;$c\t$g\t&#34;</span> <span style="color:#f92672">.</span> ($running_count<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;\t&#34;</span> <span style="color:#f92672">.</span> ($running_count<span style="color:#f92672">+</span>@countries) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;\t&#34;</span> <span style="color:#f92672">.</span> $dr;
-    }
-    $running_count <span style="color:#f92672">+=</span> @countries;
-    $dr<span style="color:#f92672">+</span><span style="color:#f92672">+</span>;
-}</code></pre></div>
-<p>The data is read into a hash before this code is executed. The keys are the Gini index and the values are an arrayref of the countries with that Gini index value. The items to iterate over are simply a sorted list of the keys in the data. Here that means a numerically descending list of the Gini index values, which could be accomplished with a simple <code>sort {$b &lt;=&gt; $a} keys %data</code>.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-perl" data-lang="perl"><span style="display:flex;"><span><span style="color:#66d9ef">my</span> $running_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">my</span> $dr <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>say <span style="color:#e6db74">&#34;Country\tGini (World Bank)\tStandard Ranking\tModified Ranking\tDense Ranking&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#66d9ef">my</span> $g (sort {$b <span style="color:#e6db74">&lt;=&gt;</span> $a} keys %data) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">my</span> @countries <span style="color:#f92672">=</span> @{$data{$g}};
+</span></span><span style="display:flex;"><span>    $g <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;NA&#34;</span> <span style="color:#66d9ef">if</span> $g <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">my</span> $c (@countries) {
+</span></span><span style="display:flex;"><span>        say <span style="color:#e6db74">&#34;$c\t$g\t&#34;</span> <span style="color:#f92672">.</span> ($running_count<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;\t&#34;</span> <span style="color:#f92672">.</span> ($running_count<span style="color:#f92672">+</span>@countries) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;\t&#34;</span> <span style="color:#f92672">.</span> $dr;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    $running_count <span style="color:#f92672">+=</span> @countries;
+</span></span><span style="display:flex;"><span>    $dr<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The data is read into a hash before this code is executed. The keys are the Gini index and the values are an arrayref of the countries with that Gini index value. The items to iterate over are simply a sorted list of the keys in the data. Here that means a numerically descending list of the Gini index values, which could be accomplished with a simple <code>sort {$b &lt;=&gt; $a} keys %data</code>.</p>
 <p>For the &ldquo;standard&rdquo; ranking, items get a ranking equivalent to all the items that came before them, plus one. So I just get my running count total and add 1. Since it is initialized at 0, this gets 1 for the highest ranked item.</p>
-
 <p>For &ldquo;modified&rdquo; ranking, there is a &ldquo;gap&rdquo; in the rankings <em>before</em> the current item, so you must add the number of tied items to the running count to produce the correct ranking.</p>
-
 <p>Finally, the &ldquo;direct&rdquo; count is easiest: you just keep a counter that starts at 1 and only increment when you move on to the next Gini index value.</p>
-
 <p>The <code>$running_count</code> is also updated each iteration with the number of items at the current index value.</p>
-
 <h1 id="challenge-3">Challenge #3</h1>
-
 <p>I don&rsquo;t think I will tackle the API challenge. Maybe another week. The other two challenges look like puzzles and this one seems a bit more like work.</p>
-
 <p>I look forward to doing more of these as not only do they seem like a fun way to flex my Perl and problem-solving skills, but I find immense value in reading other people&rsquo;s solutions. It&rsquo;s often the case that I find some incredibly creative way of solving the problem, and some solutions are so unique that I learn so much more about this language I <em>thought</em> I understood.</p>
-
 <p>That&rsquo;s all for this week, thanks for reading!</p>
 
     </div>

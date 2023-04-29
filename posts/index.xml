@@ -6,11 +6,7 @@
     <description>Recent content in Posts on Yozen Hernandez</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Jul 2019 07:07:57 -0400</lastBuildDate>
-    
-	<atom:link href="https://yzhernand.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 19 Jul 2019 07:07:57 -0400</lastBuildDate><atom:link href="https://yzhernand.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Perl Weekly Challenge 17: Writing Our Own URL Parser in Perl (But Should We?)</title>
       <link>https://yzhernand.github.io/posts/perl-weekly-challenge-17-2/</link>
@@ -18,10 +14,10 @@
       
       <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-17-2/</guid>
       <description>The second challenge in this week&amp;rsquo;s Perl Weekly Challenge asks us to parse a URL:
- Create a script to parse URL and print the components of URL. According to Wiki page, the URL syntax is as below:
+Create a script to parse URL and print the components of URL. According to Wiki page, the URL syntax is as below:
 scheme:[//[userinfo@]host[:port]]path[?query][#fragment]
 For example: jdbc:mysql://user:password@localhost:3306/pwc?profile=true#h1
- scheme: jdbc:mysql userinfo: user:password host: localhost port: 3306 path: /pwc query: profile=true fragment: h1 Sounds good. Let&amp;rsquo;s try to parse this out. Maybe we&amp;rsquo;ll use a few regex&amp;rsquo;s, and that&amp;rsquo;ll be it.</description>
+scheme: jdbc:mysql userinfo: user:password host: localhost port: 3306 path: /pwc query: profile=true fragment: h1 Sounds good. Let&amp;rsquo;s try to parse this out. Maybe we&amp;rsquo;ll use a few regex&amp;rsquo;s, and that&amp;rsquo;ll be it.</description>
     </item>
     
     <item>
@@ -31,7 +27,7 @@ For example: jdbc:mysql://user:password@localhost:3306/pwc?profile=true#h1
       
       <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-17-1/</guid>
       <description>The Perl Weekly Challenge is back, and our first challenge was to implement a function known as the Ackermann function:
- Create a script to demonstrate Ackermann function. The Ackermann function is defined as below, m and n are positive number:
+Create a script to demonstrate Ackermann function. The Ackermann function is defined as below, m and n are positive number:
 A(m, n) = n + 1 if m = 0 A(m, n) = A(m - 1, 1) if m &amp;gt; 0 and n = 0 A(m, n) = A(m - 1, A(m, n - 1)) if m &amp;gt; 0 and n &amp;gt; 0</description>
     </item>
     
@@ -42,7 +38,7 @@ A(m, n) = n + 1 if m = 0 A(m, n) = A(m - 1, 1) if m &amp;gt; 0 and n = 0 A(m, n)
       
       <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-16-2/</guid>
       <description>The second challenge of this week&amp;rsquo;s Perl Weekly Challenge deals with Bitcoin, that ubiquitous digital currency we all have heard of, few totally understand, and some wish we had never invested in when we did.
- Write a script to validate a given bitcoin address. Most Bitcoin addresses are 34 characters. They consist of random digits and uppercase and lowercase letters, with the exception that the uppercase letter “O”, uppercase letter “I”, lowercase letter “l”, and the number “0” are never used to prevent visual ambiguity.</description>
+Write a script to validate a given bitcoin address. Most Bitcoin addresses are 34 characters. They consist of random digits and uppercase and lowercase letters, with the exception that the uppercase letter “O”, uppercase letter “I”, lowercase letter “l”, and the number “0” are never used to prevent visual ambiguity.</description>
     </item>
     
     <item>
@@ -52,7 +48,7 @@ A(m, n) = n + 1 if m = 0 A(m, n) = A(m - 1, 1) if m &amp;gt; 0 and n = 0 A(m, n)
       
       <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-16-1/</guid>
       <description>This week&amp;rsquo;s Perl Weekly Challenge includes a math puzzle known as the Pythagoreas Pie Puzzle. The problem, as stated by challenge proponent Jo Christian Oterhals:
- At a party a pie is to be shared by 100 guest. The first guest gets 1% of the pie, the second guest gets 2% of the remaining pie, the third gets 3% of the remaining pie, the fourth gets 4% and so on.</description>
+At a party a pie is to be shared by 100 guest. The first guest gets 1% of the pie, the second guest gets 2% of the remaining pie, the third gets 3% of the remaining pie, the fourth gets 4% and so on.</description>
     </item>
     
     <item>
@@ -62,8 +58,8 @@ A(m, n) = n + 1 if m = 0 A(m, n) = A(m - 1, 1) if m &amp;gt; 0 and n = 0 A(m, n)
       
       <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-15-part2/</guid>
       <description>Welcome to the second part of my posts on this week&amp;rsquo;s Perl Weekly Challenge. You can find the first part of this post on either dev.to or my personal blog.
-Challenge 2  Write a script to implement Vigenère cipher. The script should be able encode and decode. Checkout wiki page for more information.
- This seemed like a cool challenge to tackle. Knowing next to nothing about encryption, I was worried that this would take me all week.</description>
+Challenge 2 Write a script to implement Vigenère cipher. The script should be able encode and decode. Checkout wiki page for more information.
+This seemed like a cool challenge to tackle. Knowing next to nothing about encryption, I was worried that this would take me all week.</description>
     </item>
     
     <item>
@@ -73,7 +69,7 @@ Challenge 2  Write a script to implement Vigenère cipher. The script should be 
       
       <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-15/</guid>
       <description>This week&amp;rsquo;s Perl Weekly Challenge touched on prime number sequences again, and some old-school cryptography (which was pretty exciting). This post is divided into two parts, one for each challenge. Find part 2 on dev.to or my blog on Github Pages.
-Challenge 1  Write a script to generate first 10 strong and weak prime numbers. For example, the *n*th prime number is represented by p(n).
+Challenge 1 Write a script to generate first 10 strong and weak prime numbers. For example, the nth prime number is represented by p(n).
 p(1) = 2 p(2) = 3 p(3) = 5 p(4) = 7 p(5) = 11</description>
     </item>
     
@@ -96,7 +92,7 @@ Now with that out of the way, let me walk you through how I approached these cha
       <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-13/</guid>
       <description>Note: I&amp;rsquo;ve also posted this over on dev.to in case anyone wanted to leave any comments there.
 This week&amp;rsquo;s Perl Weekly Challenge had two fairly fun challenges, and a 3rd API challenge that unfortunately needed an additional step I wasn&amp;rsquo;t willing to take to participate in (the website required credit card details to use their API at any level).
-Challenge 1  Write a script to print the date of last Friday of every month of a given year.</description>
+Challenge 1 Write a script to print the date of last Friday of every month of a given year.</description>
     </item>
     
     <item>
@@ -106,7 +102,7 @@ Challenge 1  Write a script to print the date of last Friday of every month of a
       
       <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-12/</guid>
       <description>Fun challenges this week! But first: I&amp;rsquo;m honored to be mentioned in the Perl Weekly Newsletter for the second time now. I&amp;rsquo;m especially honored by the very flattering notion that I&amp;rsquo;m somehow becoming popular with these posts. It&amp;rsquo;s enouraging me to make some time to write about things beyond just these challenges.
-Challenge 1  The numbers formed by adding one to the products of the smallest primes are called the Euclid Numbers (see wiki).</description>
+Challenge 1 The numbers formed by adding one to the products of the smallest primes are called the Euclid Numbers (see wiki).</description>
     </item>
     
     <item>
@@ -116,7 +112,7 @@ Challenge 1  The numbers formed by adding one to the products of the smallest pr
       
       <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-11/</guid>
       <description>Another Perl Weekly Challenge. I found this week&amp;rsquo;s challenges easier than last week&amp;rsquo;s, which is not bad as I don&amp;rsquo;t necessarily want to stress out over something that is meant to be a learning experience and to keep my skills up.
-Challenge 1  Write a script that computes the equal point in the Fahrenheit and Celsius scales, knowing that the freezing point of water is 32 °F and 0 °C, and that the boiling point of water is 212 °F and 100 °C.</description>
+Challenge 1 Write a script that computes the equal point in the Fahrenheit and Celsius scales, knowing that the freezing point of water is 32 °F and 0 °C, and that the boiling point of water is 212 °F and 100 °C.</description>
     </item>
     
     <item>
@@ -126,9 +122,9 @@ Challenge 1  Write a script that computes the equal point in the Fahrenheit and 
       
       <guid>https://yzhernand.github.io/posts/perl-weekly-challenge-10/</guid>
       <description>Back at it again with another week of the Perl Weekly Challenge. This time for challenge #10
-Challenge #1  Write a script to encode/decode Roman numerals. For example, given Roman numeral CCXLVI, it should return 246. Similarly, for decimal number 39, it should return XXXIX.
- I made the following assumptions for this challenge:
- Valid Roman Numerals follow the &amp;ldquo;Subtractive notation&amp;rdquo; convention mentioned on the Wikipedia page. Only one leading subtractive character is allowed (eg, &amp;lsquo;VIII&amp;rsquo; for &amp;lsquo;8&amp;rsquo;, but not &amp;lsquo;IIX&amp;rsquo;).</description>
+Challenge #1 Write a script to encode/decode Roman numerals. For example, given Roman numeral CCXLVI, it should return 246. Similarly, for decimal number 39, it should return XXXIX.
+I made the following assumptions for this challenge:
+Valid Roman Numerals follow the &amp;ldquo;Subtractive notation&amp;rdquo; convention mentioned on the Wikipedia page. Only one leading subtractive character is allowed (eg, &amp;lsquo;VIII&amp;rsquo; for &amp;lsquo;8&amp;rsquo;, but not &amp;lsquo;IIX&amp;rsquo;).</description>
     </item>
     
     <item>

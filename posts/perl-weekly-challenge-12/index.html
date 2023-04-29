@@ -2,24 +2,25 @@
 <html lang="en-us">
   <head>
     <title>Perl Weekly Challenge 12: Euclid Numbers and Common Paths // Yozen Hernandez</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.62.2" />
+    <meta name="generator" content="Hugo 0.111.3">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Yozen Hernandez" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="https://yzhernand.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+    <link rel="stylesheet" href="/css/main.min.e04f32518dbcdbc64ddad5e1768be6d5edcc5cdba41caea400b8b4cdbc17a452.css" />
 
     
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Perl Weekly Challenge 12: Euclid Numbers and Common Paths"/>
 <meta name="twitter:description" content="Fun challenges this week! But first: I&rsquo;m honored to be mentioned in the Perl Weekly Newsletter for the second time now. I&rsquo;m especially honored by the very flattering notion that I&rsquo;m somehow becoming popular with these posts. It&rsquo;s enouraging me to make some time to write about things beyond just these challenges.
-Challenge 1  The numbers formed by adding one to the products of the smallest primes are called the Euclid Numbers (see wiki)."/>
+Challenge 1 The numbers formed by adding one to the products of the smallest primes are called the Euclid Numbers (see wiki)."/>
 
     <meta property="og:title" content="Perl Weekly Challenge 12: Euclid Numbers and Common Paths" />
 <meta property="og:description" content="Fun challenges this week! But first: I&rsquo;m honored to be mentioned in the Perl Weekly Newsletter for the second time now. I&rsquo;m especially honored by the very flattering notion that I&rsquo;m somehow becoming popular with these posts. It&rsquo;s enouraging me to make some time to write about things beyond just these challenges.
-Challenge 1  The numbers formed by adding one to the products of the smallest primes are called the Euclid Numbers (see wiki)." />
+Challenge 1 The numbers formed by adding one to the products of the smallest primes are called the Euclid Numbers (see wiki)." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://yzhernand.github.io/posts/perl-weekly-challenge-12/" />
+<meta property="og:url" content="https://yzhernand.github.io/posts/perl-weekly-challenge-12/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-06-10T13:51:38-04:00" />
 <meta property="article:modified_time" content="2019-06-10T13:51:38-04:00" />
 
@@ -28,29 +29,41 @@ Challenge 1  The numbers formed by adding one to the products of the smallest pr
   <body>
     <header class="app-header">
       <a href="https://yzhernand.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="Yozen Hernandez" /></a>
-      <h1>Yozen Hernandez</h1>
-      <p>Bioinformatics guy who programs in Perl, C, and R. Occasionally writes about things.</p>
+      <span class="app-header-title">Yozen Hernandez</span>
+      <p>Bioinformatician who programs in Perl, C, and R. Occasionally writes about things.</p>
       <div class="app-header-social">
         
-          <a target="_blank" href="https://github.com/yzhernand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
-  <title>github</title>
+          <a href="https://github.com/yzhernand" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
   <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-</svg></a>
+</svg>
+          </a>
         
-          <a target="_blank" href="https://twitter.com/yzhernand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
-  <title>twitter</title>
-  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
-</svg></a>
+          <a href="https://fosstodon.org/@yzh" target="_blank" rel="noreferrer noopener me">
+            <span class="icon">
+  <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Mastodon</title><path d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/></svg>
+</span>
+          </a>
         
-          <a target="_blank" href="https://www.linkedin.com/in/yzhernand/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
-  <title>linkedin</title>
+          <a href="https://www.linkedin.com/in/yzhernand/" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>LinkedIn</title>
   <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
-</svg></a>
+</svg>
+          </a>
         
-          <a target="_blank" href="https://www.researchgate.net/profile/Yoezen_Hernandez"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
-  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-</svg></a>
+          <a href="https://www.researchgate.net/profile/Yoezen_Hernandez" target="_blank" rel="noreferrer noopener me">
+            <span class="icon">
+  <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>ResearchGate</title><path d="M19.586 0c-.818 0-1.508.19-2.073.565-.563.377-.97.936-1.213 1.68a3.193 3.193 0 0 0-.112.437 8.365 8.365 0 0 0-.078.53 9 9 0 0 0-.05.727c-.01.282-.013.621-.013 1.016a31.121 31.123 0 0 0 .014 1.017 9 9 0 0 0 .05.727 7.946 7.946 0 0 0 .077.53h-.005a3.334 3.334 0 0 0 .113.438c.245.743.65 1.303 1.214 1.68.565.376 1.256.564 2.075.564.8 0 1.536-.213 2.105-.603.57-.39.94-.916 1.175-1.65.076-.235.135-.558.177-.93a10.9 10.9 0 0 0 .043-1.207v-.82c0-.095-.047-.142-.14-.142h-3.064c-.094 0-.14.047-.14.141v.956c0 .094.046.14.14.14h1.666c.056 0 .084.03.084.086 0 .36 0 .62-.036.865-.038.244-.1.447-.147.606-.108.385-.348.664-.638.876-.29.212-.738.35-1.227.35-.545 0-.901-.15-1.21-.353-.306-.203-.517-.454-.67-.915a3.136 3.136 0 0 1-.147-.762 17.366 17.367 0 0 1-.034-.656c-.01-.26-.014-.572-.014-.939a26.401 26.403 0 0 1 .014-.938 15.821 15.822 0 0 1 .035-.656 3.19 3.19 0 0 1 .148-.76 1.89 1.89 0 0 1 .742-1.01c.344-.244.593-.352 1.137-.352.508 0 .815.096 1.144.303.33.207.528.492.764.925.047.094.111.118.198.07l1.044-.43c.075-.048.09-.115.042-.199a3.549 3.549 0 0 0-.466-.742 3 3 0 0 0-.679-.607 3.313 3.313 0 0 0-.903-.41A4.068 4.068 0 0 0 19.586 0zM8.217 5.836c-1.69 0-3.036.086-4.297.086-1.146 0-2.291 0-3.007-.029v.831l1.088.2c.744.144 1.174.488 1.174 2.264v11.288c0 1.777-.43 2.12-1.174 2.263l-1.088.2v.832c.773-.029 2.12-.086 3.465-.086 1.29 0 2.951.057 3.667.086v-.831l-1.49-.2c-.773-.115-1.174-.487-1.174-2.264v-4.784c.688.057 1.29.057 2.206.057 1.748 3.123 3.41 5.472 4.355 6.56.86 1.032 2.177 1.691 3.839 1.691.487 0 1.003-.086 1.318-.23v-.744c-1.031 0-2.063-.716-2.808-1.518-1.26-1.376-2.95-3.582-4.355-6.074 2.32-.545 4.04-2.722 4.04-4.9 0-3.208-2.492-4.698-5.758-4.698zm-.515 1.29c2.406 0 3.839 1.26 3.839 3.552 0 2.263-1.547 3.782-4.097 3.782-.974 0-1.404-.03-2.063-.086v-7.19c.66-.059 1.547-.059 2.32-.059z"/></svg>
+</span>
+          </a>
+        
+          <a href="https://orcid.org/0000-0003-3349-8856" target="_blank" rel="noreferrer noopener me">
+            <span class="icon">
+  <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>ORCID</title><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>
+</span>
+          </a>
         
       </div>
     </header>
@@ -61,130 +74,112 @@ Challenge 1  The numbers formed by adding one to the products of the smallest pr
       <h1 class ="post-title">Perl Weekly Challenge 12: Euclid Numbers and Common Paths</h1>
       <div class="post-meta">
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
   <title>calendar</title>
   <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
 </svg>
           Jun 10, 2019
         </div>
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
   <title>clock</title>
   <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
 </svg>
           6 min read
-        </div></div>
+        </div>
+      </div>
     </header>
     <div class="post-content">
-      
-
-<p>Fun challenges this week! But first: I&rsquo;m honored to be mentioned in the <a href="http://perlweekly.com/archive/411.html">Perl Weekly Newsletter</a> for the second time now. I&rsquo;m especially honored by the very flattering notion that I&rsquo;m somehow becoming popular with these posts. It&rsquo;s enouraging me to make some time to write about things beyond just these challenges.</p>
-
+      <p>Fun challenges this week! But first: I&rsquo;m honored to be mentioned in the <a href="http://perlweekly.com/archive/411.html">Perl Weekly Newsletter</a> for the second time now. I&rsquo;m especially honored by the very flattering notion that I&rsquo;m somehow becoming popular with these posts. It&rsquo;s enouraging me to make some time to write about things beyond just these challenges.</p>
 <h1 id="challenge-1">Challenge 1</h1>
-
 <blockquote>
 <p>The numbers formed by adding one to the products of the smallest primes are called the Euclid Numbers (see wiki). Write a script that finds the smallest Euclid Number that is not prime. This challenge was proposed by Laurent Rosenfeld.</p>
 </blockquote>
-
 <p>For this challenge, I decided to things in a bit more sophisticated manner than the approach I took earlier with the 1st challenge in <a href="https://yzhernand.github.io/posts/perl-weekly-challenge-9/">PWC Week 9</a>. Two fellow participants (<a href="https://jacoby.github.io//2019/05/21/ranking-in-perl.html">Dave Jacoby</a> and <a href="http://blogs.perl.org/users/laurent_r/2019/05/perl-weekly-challenge-9-squares-and-rankings.html">Laurent Rosenfeld</a>) solved that challenge using a prime numbers iterator, with Laurent <a href="http://blogs.perl.org/users/laurent_r/2019/05/perl-weekly-challenge-9-square-numbers-and-functional-programming-in-perl.html">also using closures for the iterator</a>. I love closures, so I took that approach as well. I also love modularizing code, so I have a few subs I used for this challenge:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">is_prime</span> {
-    <span style="color:#66d9ef">my</span> $n <span style="color:#f92672">=</span> shift;
-
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">if</span> grep { $n % <span style="color:#960050;background-color:#1e0010">$</span>_ <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> } ( <span style="color:#ae81ff">2</span> <span style="color:#f92672">..</span> sqrt($n) );
-
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
-}
-
-<span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">prime_iterator</span> {
-    <span style="color:#66d9ef">my</span> $n <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">sub</span> {
-        <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">until</span> is_prime <span style="color:#f92672">+</span><span style="color:#f92672">+</span>$n;
-        <span style="color:#66d9ef">return</span> $n;
-        }
-}
-
-<span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">euclid_prime_iterator</span> {
-    <span style="color:#66d9ef">my</span> $prime_iter <span style="color:#f92672">=</span> prime_iterator();
-    <span style="color:#66d9ef">my</span> $prime_prod <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">sub</span> {
-        $prime_prod <span style="color:#f92672">*=</span> $prime_iter<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>();
-        <span style="color:#66d9ef">return</span> $prime_prod <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-        }
-}</code></pre></div>
-<p>You&rsquo;ve probably seen something like the <code>is_prime</code> function above somewhere on the internet or maybe a textbook. Basically, it goes through all integers between 2 and the square root of the input value and checks if any of those values can evenly divide the input. In scalar context, as above, the <code>grep</code> function will return how many times the expression in the block was true. So we should return 0 if grep returns any non-0 value since that means at least one value was able to divide the input.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-perl" data-lang="perl"><span style="display:flex;"><span><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">is_prime</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">my</span> $n <span style="color:#f92672">=</span> shift;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">if</span> grep { $n % <span style="color:#960050;background-color:#1e0010">$</span>_ <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> } ( <span style="color:#ae81ff">2</span> <span style="color:#f92672">..</span> sqrt($n) );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">prime_iterator</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">my</span> $n <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">sub</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">until</span> is_prime <span style="color:#f92672">++</span>$n;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $n;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">euclid_prime_iterator</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">my</span> $prime_iter <span style="color:#f92672">=</span> prime_iterator();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">my</span> $prime_prod <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">sub</span> {
+</span></span><span style="display:flex;"><span>        $prime_prod <span style="color:#f92672">*=</span> $prime_iter<span style="color:#f92672">-&gt;</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $prime_prod <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>You&rsquo;ve probably seen something like the <code>is_prime</code> function above somewhere on the internet or maybe a textbook. Basically, it goes through all integers between 2 and the square root of the input value and checks if any of those values can evenly divide the input. In scalar context, as above, the <code>grep</code> function will return how many times the expression in the block was true. So we should return 0 if grep returns any non-0 value since that means at least one value was able to divide the input.</p>
 <p><code>prime_iterator</code> also works fairly simply, but if you&rsquo;ve never seen a closure in Perl, I suggest reading the appropriate <a href="http://modernperlbooks.com/books/modern_perl_2016/05-perl-functions.html#Q2xvc3VyZXM">section</a> in chromatic&rsquo;s Modern Perl (2016). I&rsquo;ll briefly describe the concept here anyway, for completeness, but in a simplified way.</p>
-
 <p>Basically, if you declare an anonymous subroutine (eg, <code>my $anon_sub = sub {...}</code>), it can &ldquo;save&rdquo; the variables of its enclosing scope. In the code above, I declared <code>$n</code> and initialized it to <code>1</code>. The anonymous sub is returned to the caller. However, that sub <em>still has access to <code>$n</code></em> with whatever value it had when the sub created. What&rsquo;s more, it can modify the value of <code>$n</code>, and the next time you call the anonymous sub, the new value of <code>$n</code> is what will be used.</p>
-
 <p>This lets us essentially save time: each time the sub above is called, the code inside is called starting with whatever the last value of <code>$n</code> was. If we were already up to <code>$n = 257</code> , the next time the sub is called, we don&rsquo;t have to rediscover the primes in the range <code>2 .. 256</code> before we look for the next prime after 257. The closure let us save the <em>state</em> of <code>$n</code>. And each call to <code>prime_iterator</code> has its own copy of <code>$n</code>, which is totally independent from any others, so you can have multiple iterators all with their own state.</p>
-
 <p>We can use that iterator then for the next function, <code>euclid_prime_iterator</code>. That sub uses the iterator created by <code>prime_iterator</code> to generate its sequence, again making use of a closure. Anonymous subs can also be saved as scalar variables, so declaring an anonymous function after initializing the prime numbers iterator works the same way as it did with <code>$n</code> above. Since the iterator saved in <code>$prime_iter</code> and the variable <code>$prime_prod</code> keep their state, each call to the iterator generated by <code>euclid_prime_iterator</code> picks up right after the previous call, and generates the very next Euclid prime without needless recalculation.</p>
-
 <p>The challenge itself is solved by this bit of code, at the end of my script:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#75715e"># scen = Smallest Composite Euclid Number</span>
-<span style="color:#66d9ef">my</span> $iter <span style="color:#f92672">=</span> euclid_prime_iterator();
-<span style="color:#66d9ef">my</span> $scen <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-$scen <span style="color:#f92672">=</span> $iter<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>() <span style="color:#66d9ef">until</span> ( is_prime($scen) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> );
-say $scen;</code></pre></div>
-<p>As soon as the value returned by the iterator is non-prime (ie, <em>composite</em>), we stop the <code>until</code> loop and print the value to the screen. Since we know that this will reach a stop condition, I did not include some kind of bail-out condition to prevent it from running too long.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-perl" data-lang="perl"><span style="display:flex;"><span><span style="color:#75715e"># scen = Smallest Composite Euclid Number</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">my</span> $iter <span style="color:#f92672">=</span> euclid_prime_iterator();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">my</span> $scen <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>$scen <span style="color:#f92672">=</span> $iter<span style="color:#f92672">-&gt;</span>() <span style="color:#66d9ef">until</span> ( is_prime($scen) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> );
+</span></span><span style="display:flex;"><span>say $scen;
+</span></span></code></pre></div><p>As soon as the value returned by the iterator is non-prime (ie, <em>composite</em>), we stop the <code>until</code> loop and print the value to the screen. Since we know that this will reach a stop condition, I did not include some kind of bail-out condition to prevent it from running too long.</p>
 <h1 id="challenge-2">Challenge 2</h1>
-
 <blockquote>
 <p>Write a script that finds the common directory path, given a collection of paths and directory separator. For example, if the following paths are supplied.</p>
 </blockquote>
-
 <p>My solutions tend to be far more verbose than other participants, but I&rsquo;m OK with that ☺. This solution is no exception.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">find_common_path</span> {
-    <span style="color:#66d9ef">my</span> ( $path_sep, $paths_ref ) <span style="color:#f92672">=</span> @_;
-    <span style="color:#66d9ef">my</span> @common_path;
-
-    <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">my</span> $p ( @{$paths_ref} ) {
-        <span style="color:#66d9ef">my</span> @split_p <span style="color:#f92672">=</span> split <span style="color:#e6db74">/$path_sep/</span>, $p;
-        <span style="color:#66d9ef">unless</span> (@common_path) {
-            @common_path <span style="color:#f92672">=</span> @split_p;
-            <span style="color:#66d9ef">next</span>;
-        }
-
-        <span style="color:#66d9ef">if</span> ( @split_p <span style="color:#f92672">&lt;</span> @common_path ) {
-            @common_path <span style="color:#f92672">=</span> @common_path[ <span style="color:#ae81ff">0</span> <span style="color:#f92672">..</span> @split_p <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ];
-        }
-
-        <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">my</span> $i ( <span style="color:#ae81ff">0</span> <span style="color:#f92672">..</span> @common_path <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ) {
-
-            <span style="color:#75715e"># Stop processing this path as soon as we encounter</span>
-            <span style="color:#75715e"># a directory not seen before</span>
-            <span style="color:#66d9ef">if</span> ( $split_p[$i] <span style="color:#f92672">ne</span> $common_path[$i] ) {
-
-                <span style="color:#75715e"># Save only the so-far shared path.</span>
-                <span style="color:#75715e"># The array will always have one element</span>
-                <span style="color:#75715e"># thanks to the fact that the first separator</span>
-                <span style="color:#75715e"># is also the first character.</span>
-                @common_path <span style="color:#f92672">=</span> @common_path[ <span style="color:#ae81ff">0</span> <span style="color:#f92672">..</span> $i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ];
-                <span style="color:#66d9ef">last</span>;
-            }
-        }
-
-        <span style="color:#66d9ef">return</span> (<span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#66d9ef">if</span> (@common_path <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> $common_path[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">eq</span> <span style="color:#e6db74">&#39;&#39;</span>);
-    }
-
-    <span style="color:#66d9ef">return</span> @common_path;
-}</code></pre></div>
-<p>I keep an array of the directories which are in common so far (<code>@common_path</code>). For the first item in the path list, this saves the entire array of directories into <code>@common_path</code> and moves on.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-perl" data-lang="perl"><span style="display:flex;"><span><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">find_common_path</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">my</span> ( $path_sep, $paths_ref ) <span style="color:#f92672">=</span> @_;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">my</span> @common_path;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">my</span> $p ( @{$paths_ref} ) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">my</span> @split_p <span style="color:#f92672">=</span> split <span style="color:#e6db74">/$path_sep/</span>, $p;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">unless</span> (@common_path) {
+</span></span><span style="display:flex;"><span>            @common_path <span style="color:#f92672">=</span> @split_p;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">next</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( @split_p <span style="color:#f92672">&lt;</span> @common_path ) {
+</span></span><span style="display:flex;"><span>            @common_path <span style="color:#f92672">=</span> @common_path[ <span style="color:#ae81ff">0</span> <span style="color:#f92672">..</span> @split_p <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">my</span> $i ( <span style="color:#ae81ff">0</span> <span style="color:#f92672">..</span> @common_path <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Stop processing this path as soon as we encounter</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># a directory not seen before</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> ( $split_p[$i] <span style="color:#f92672">ne</span> $common_path[$i] ) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># Save only the so-far shared path.</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># The array will always have one element</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># thanks to the fact that the first separator</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># is also the first character.</span>
+</span></span><span style="display:flex;"><span>                @common_path <span style="color:#f92672">=</span> @common_path[ <span style="color:#ae81ff">0</span> <span style="color:#f92672">..</span> $i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> ];
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">last</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (<span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#66d9ef">if</span> (@common_path <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> $common_path[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">eq</span> <span style="color:#e6db74">&#39;&#39;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> @common_path;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>I keep an array of the directories which are in common so far (<code>@common_path</code>). For the first item in the path list, this saves the entire array of directories into <code>@common_path</code> and moves on.</p>
 <p>For subsequent paths, we simply check each directory in order, truncating the common path so far, if necessary because the common directory list can only be as long as the shortest path. In order to be a common path, the directories have to match both in names and in position. So we iterate over the <code>@common_path</code> array by index and compare both arrays at each index. As soon as we discover a different, we cut off the <code>@common_path</code> array so that only the shared directories are kept.</p>
-
 <p>After the first path is processed, the first element of <code>@common_path</code> will always be <code>''</code>, since the <code>split</code> function will return elements <em>around</em> the separators. For example, you execute <code>split &quot;/&quot;, &quot;/path&quot;</code>, you will get a list composed of the elements <code>('', 'path')</code> because split cuts at the separator <code>/</code>, and the empty string was to the left of the <code>/</code> in <code>&quot;/path&quot;</code>. This means that <code>@common_path</code> is guaranteed to always have at least one element, ensuring the array slice I take above always works.</p>
-
 <p>At the end of the outer for loop, I bail out and stop processing any remaining paths if there is no shared directories up to this point. Finally, the <code>@common_path</code> array is returned after all paths are processed successfully.</p>
-
 <h1 id="challenge-3">Challenge 3</h1>
-
 <blockquote>
 <p>Find out the synonyms of a given word using the Synonyms API. The API challenge is optional but would love to see your solution.</p>
 </blockquote>
-
 <p>Will I get to challenge 3 this week? We shall see!</p>
 
     </div>
